@@ -137,7 +137,9 @@
     "hide": "Скрий",
     "export": "Експортирай",
     "import": "Импортирай",
-    "cannotUndo": "Това действие не може да бъде отменено"
+    "cannotUndo": "Това действие не може да бъде отменено",
+    "archive": "Архивиране",
+    "restore": "Възстановяване"
   },
   "operators": {
     "in": "В"
@@ -396,7 +398,9 @@
   "products": {
     "domain": "Продукти",
     "list": {
-      "noRecordsMessage": "Създайте първия си продукт, за да започнете да продавате."
+      "noRecordsMessage": "Създайте първия си продукт, за да започнете да продавате.",
+      "showDrafted": "Покажи черновите",
+      "showArchived": "Покажи архивираните"
     },
     "edit": {
       "header": "Редактиране на продукт",
@@ -532,7 +536,8 @@
       "draft": "Чернова",
       "published": "Публикуван",
       "proposed": "Предложен",
-      "rejected": "Отхвърлен"
+      "rejected": "Отхвърлен",
+      "archived": "Архивиран"
     },
     "fields": {
       "title": {
@@ -712,8 +717,28 @@
         "error": {
           "header": "Неуспешно изтриване на продукта"
         }
+      },
+      "archive": {
+        "success": {
+          "header": "Архивиране",
+          "description": "{{title}}"
+        },
+        "error": {
+          "header": "Архивиране"
+        }
+      },
+      "restore": {
+        "success": {
+          "header": "Възстановяване",
+          "description": "{{title}}"
+        },
+        "error": {
+          "header": "Възстановяване"
+        }
       }
-    }
+    },
+    "archiveWarning": "Архивиране {{title}}.",
+    "restoreWarning": "Възстановяване {{title}}."
   },
   "collections": {
     "domain": "Колекции",

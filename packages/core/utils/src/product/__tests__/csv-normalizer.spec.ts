@@ -1445,4 +1445,20 @@ describe("CSV processor", () => {
       )
     })
   })
+
+  it("preserves archived product status from CSV", () => {
+    const processor = new CSVNormalizer([
+      CSVNormalizer.preProcess(
+        {
+          "Product Handle": "archived-handle",
+          "Product Title": "Archived product",
+          "Product Status": "archived",
+        },
+        1
+      ),
+    ])
+
+    const products = processor.proccess()
+    expect(products.toCreate["archived-handle"].status).toEqual("archived")
+  })
 })

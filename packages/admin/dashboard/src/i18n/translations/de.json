@@ -136,7 +136,9 @@
     "logout": "Abmelden",
     "hide": "Verstecken",
     "export": "Export",
-    "import": "Import"
+    "import": "Import",
+    "archive": "Archivieren",
+    "restore": "Wiederherstellen"
   },
   "operators": {
     "in": "In"
@@ -384,7 +386,9 @@
   "products": {
     "domain": "Produkte",
     "list": {
-      "noRecordsMessage": "Erstellen Sie Ihr erstes Produkt, um mit dem Verkauf zu beginnen."
+      "noRecordsMessage": "Erstellen Sie Ihr erstes Produkt, um mit dem Verkauf zu beginnen.",
+      "showDrafted": "Entwürfe anzeigen",
+      "showArchived": "Archivierte anzeigen"
     },
     "edit": {
       "header": "Produkt bearbeiten",
@@ -520,7 +524,8 @@
       "draft": "Entwurf",
       "published": "Veröffentlicht",
       "proposed": "Vorgeschlagen",
-      "rejected": "Abgelehnt"
+      "rejected": "Abgelehnt",
+      "archived": "Archiviert"
     },
     "fields": {
       "title": {
@@ -673,8 +678,28 @@
         "error": {
           "header": "Das Produkt konnte nicht gelöscht werden"
         }
+      },
+      "archive": {
+        "success": {
+          "header": "Archivieren",
+          "description": "{{title}}"
+        },
+        "error": {
+          "header": "Archivieren"
+        }
+      },
+      "restore": {
+        "success": {
+          "header": "Wiederherstellen",
+          "description": "{{title}}"
+        },
+        "error": {
+          "header": "Wiederherstellen"
+        }
       }
-    }
+    },
+    "archiveWarning": "Archivieren {{title}}.",
+    "restoreWarning": "Wiederherstellen {{title}}."
   },
   "collections": {
     "domain": "Sammlungen",

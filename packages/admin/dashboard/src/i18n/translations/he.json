@@ -138,7 +138,9 @@
     "hide": "הסתר",
     "export": "ייצא",
     "import": "ייבא",
-    "cannotUndo": "פעולה זו אינה ניתנת לביטול"
+    "cannotUndo": "פעולה זו אינה ניתנת לביטול",
+    "archive": "העבר לארכיון",
+    "restore": "שחזר"
   },
   "operators": {
     "in": "ב"
@@ -398,7 +400,9 @@
   "products": {
     "domain": "מוצרים",
     "list": {
-      "noRecordsMessage": "צור את המוצר הראשון שלך כדי להתחיל למכור."
+      "noRecordsMessage": "צור את המוצר הראשון שלך כדי להתחיל למכור.",
+      "showDrafted": "הצג טיוטות",
+      "showArchived": "הצג בארכיון"
     },
     "edit": {
       "header": "ערוך מוצר",
@@ -534,7 +538,8 @@
       "draft": "טיוטה",
       "published": "פורסם",
       "proposed": "מוצע",
-      "rejected": "נדחה"
+      "rejected": "נדחה",
+      "archived": "בארכיון"
     },
     "fields": {
       "title": {
@@ -714,8 +719,28 @@
         "error": {
           "header": "נכשל במחיקת מוצר"
         }
+      },
+      "archive": {
+        "success": {
+          "header": "העבר לארכיון",
+          "description": "{{title}}"
+        },
+        "error": {
+          "header": "העבר לארכיון"
+        }
+      },
+      "restore": {
+        "success": {
+          "header": "שחזר",
+          "description": "{{title}}"
+        },
+        "error": {
+          "header": "שחזר"
+        }
       }
-    }
+    },
+    "archiveWarning": "העבר לארכיון {{title}}.",
+    "restoreWarning": "שחזר {{title}}."
   },
   "collections": {
     "domain": "קולקציות",
@@ -2666,7 +2691,10 @@
         "placeholder": "wrong_size",
         "tooltip": "הערך צריך להיות מזהה ייחודי לסיבת ההחזרה."
       },
-      "label": { "label": "תווית", "placeholder": "מידה שגויה" },
+      "label": {
+        "label": "תווית",
+        "placeholder": "מידה שגויה"
+      },
       "description": {
         "label": "תיאור",
         "placeholder": "הלקוח קיבל את המידה הלא נכונה"

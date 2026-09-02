@@ -148,7 +148,9 @@
     "hide": "Gizle",
     "export": "Dışa Aktar",
     "import": "İçe Aktar",
-    "cannotUndo": "Bu işlem geri alınamaz"
+    "cannotUndo": "Bu işlem geri alınamaz",
+    "archive": "Arşivle",
+    "restore": "Geri yükle"
   },
   "operators": {
     "in": "İçinde"
@@ -411,7 +413,9 @@
   "products": {
     "domain": "Ürünler",
     "list": {
-      "noRecordsMessage": "Satışa başlamak için ilk ürününüzü oluşturun."
+      "noRecordsMessage": "Satışa başlamak için ilk ürününüzü oluşturun.",
+      "showDrafted": "Taslakları göster",
+      "showArchived": "Arşivlenenleri göster"
     },
     "edit": {
       "header": "Ürünü Düzenle",
@@ -566,7 +570,8 @@
       "draft": "Taslak",
       "published": "Yayınlandı",
       "proposed": "Önerildi",
-      "rejected": "Reddedildi"
+      "rejected": "Reddedildi",
+      "archived": "Arşivlendi"
     },
     "columns": {
       "product_display": "Ürün",
@@ -758,8 +763,28 @@
         "error": {
           "header": "Ürün silinemedi"
         }
+      },
+      "archive": {
+        "success": {
+          "header": "Arşivle",
+          "description": "{{title}}"
+        },
+        "error": {
+          "header": "Arşivle"
+        }
+      },
+      "restore": {
+        "success": {
+          "header": "Geri yükle",
+          "description": "{{title}}"
+        },
+        "error": {
+          "header": "Geri yükle"
+        }
       }
-    }
+    },
+    "archiveWarning": "Arşivle {{title}}.",
+    "restoreWarning": "Geri yükle {{title}}."
   },
   "collections": {
     "domain": "Koleksiyonlar",

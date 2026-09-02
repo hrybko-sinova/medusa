@@ -138,7 +138,9 @@
     "hide": "Elrejtés",
     "export": "Export",
     "import": "Import",
-    "cannotUndo": "Nem vonható vissza"
+    "cannotUndo": "Nem vonható vissza",
+    "archive": "Archiválás",
+    "restore": "Visszaállítás"
   },
   "operators": {
     "in": "In"
@@ -398,7 +400,9 @@
   "products": {
     "domain": "Termékek",
     "list": {
-      "noRecordsMessage": "Hozza létre az első terméket"
+      "noRecordsMessage": "Hozza létre az első terméket",
+      "showDrafted": "Piszkozatok megjelenítése",
+      "showArchived": "Archiváltak megjelenítése"
     },
     "edit": {
       "header": "Termék szerkesztése",
@@ -534,7 +538,8 @@
       "draft": "Piszkozat",
       "published": "Közzétéve",
       "proposed": "Javasolt",
-      "rejected": "Elutasítva"
+      "rejected": "Elutasítva",
+      "archived": "Archivált"
     },
     "fields": {
       "title": {
@@ -710,8 +715,28 @@
         "error": {
           "header": "Hiba történt a termék törlésekor"
         }
+      },
+      "archive": {
+        "success": {
+          "header": "Archiválás",
+          "description": "{{title}}"
+        },
+        "error": {
+          "header": "Archiválás"
+        }
+      },
+      "restore": {
+        "success": {
+          "header": "Visszaállítás",
+          "description": "{{title}}"
+        },
+        "error": {
+          "header": "Visszaállítás"
+        }
       }
-    }
+    },
+    "archiveWarning": "Archiválás {{title}}.",
+    "restoreWarning": "Visszaállítás {{title}}."
   },
   "collections": {
     "domain": "Gyűjtemények",
@@ -2654,7 +2679,10 @@
         "placeholder": "wrong_size",
         "tooltip": "Az értéknek egyedi azonosítónak kell lennie a visszaküldési okhoz."
       },
-      "label": { "label": "Címke", "placeholder": "Rossz méret" },
+      "label": {
+        "label": "Címke",
+        "placeholder": "Rossz méret"
+      },
       "description": {
         "label": "Leírás",
         "placeholder": "A vásárló rossz méretet kapott"

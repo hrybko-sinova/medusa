@@ -155,7 +155,9 @@
     "import": "インポート",
     "cannotUndo": "この操作は元に戻せません",
     "manage": "管理",
-    "goToProductOption": "商品オプションへ移動"
+    "goToProductOption": "商品オプションへ移動",
+    "archive": "アーカイブ",
+    "restore": "復元"
   },
   "operators": {
     "in": "含む"
@@ -418,7 +420,9 @@
   "products": {
     "domain": "商品",
     "list": {
-      "noRecordsMessage": "最初の商品を作成して販売を開始しましょう。"
+      "noRecordsMessage": "最初の商品を作成して販売を開始しましょう。",
+      "showDrafted": "下書きを表示",
+      "showArchived": "アーカイブを表示"
     },
     "edit": {
       "header": "商品を編集",
@@ -574,7 +578,8 @@
       "draft": "下書き",
       "published": "公開済み",
       "proposed": "提案済み",
-      "rejected": "却下"
+      "rejected": "却下",
+      "archived": "アーカイブ済み"
     },
     "columns": {
       "product_display": "商品",
@@ -776,8 +781,28 @@
         "error": {
           "header": "商品の削除に失敗しました"
         }
+      },
+      "archive": {
+        "success": {
+          "header": "アーカイブ",
+          "description": "{{title}}"
+        },
+        "error": {
+          "header": "アーカイブ"
+        }
+      },
+      "restore": {
+        "success": {
+          "header": "復元",
+          "description": "{{title}}"
+        },
+        "error": {
+          "header": "復元"
+        }
       }
-    }
+    },
+    "archiveWarning": "アーカイブ {{title}}.",
+    "restoreWarning": "復元 {{title}}."
   },
   "collections": {
     "domain": "コレクション",

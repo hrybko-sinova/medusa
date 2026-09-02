@@ -137,7 +137,9 @@
     "hide": "Скриј",
     "export": "Извоз",
     "import": "Увоз",
-    "cannotUndo": "Ова дејство не може да се врати"
+    "cannotUndo": "Ова дејство не може да се врати",
+    "archive": "Архивирај",
+    "restore": "Врати"
   },
   "operators": {
     "in": "Во"
@@ -396,7 +398,9 @@
   "products": {
     "domain": "Производи",
     "list": {
-      "noRecordsMessage": "Направете го вашиот прв производ за да започнете со продажба."
+      "noRecordsMessage": "Направете го вашиот прв производ за да започнете со продажба.",
+      "showDrafted": "Прикажи нацрти",
+      "showArchived": "Прикажи архивирани"
     },
     "edit": {
       "header": "Уреди производ",
@@ -532,7 +536,8 @@
       "draft": "Драфт",
       "published": "Објавено",
       "proposed": "Предложено",
-      "rejected": "Одбиено"
+      "rejected": "Одбиено",
+      "archived": "Архивирано"
     },
     "fields": {
       "title": {
@@ -694,8 +699,28 @@
         "error": {
           "header": "Не успеа да се избрише производот"
         }
+      },
+      "archive": {
+        "success": {
+          "header": "Архивирај",
+          "description": "{{title}}"
+        },
+        "error": {
+          "header": "Архивирај"
+        }
+      },
+      "restore": {
+        "success": {
+          "header": "Врати",
+          "description": "{{title}}"
+        },
+        "error": {
+          "header": "Врати"
+        }
       }
-    }
+    },
+    "archiveWarning": "Архивирај {{title}}.",
+    "restoreWarning": "Врати {{title}}."
   },
   "collections": {
     "domain": "Колекции",

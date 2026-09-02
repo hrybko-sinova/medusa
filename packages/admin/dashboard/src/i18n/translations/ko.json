@@ -138,7 +138,9 @@
     "hide": "숨기기",
     "export": "내보내기",
     "import": "가져오기",
-    "cannotUndo": "이 작업은 취소할 수 없습니다"
+    "cannotUndo": "이 작업은 취소할 수 없습니다",
+    "archive": "보관",
+    "restore": "복원"
   },
   "operators": {
     "in": "포함"
@@ -398,7 +400,9 @@
   "products": {
     "domain": "제품",
     "list": {
-      "noRecordsMessage": "판매를 시작하려면 첫 번째 제품을 생성하세요."
+      "noRecordsMessage": "판매를 시작하려면 첫 번째 제품을 생성하세요.",
+      "showDrafted": "초안 표시",
+      "showArchived": "보관됨 표시"
     },
     "edit": {
       "header": "제품 편집",
@@ -534,7 +538,8 @@
       "draft": "초안",
       "published": "게시됨",
       "proposed": "제안됨",
-      "rejected": "거부됨"
+      "rejected": "거부됨",
+      "archived": "보관됨"
     },
     "fields": {
       "title": {
@@ -714,8 +719,28 @@
         "error": {
           "header": "제품 삭제 실패"
         }
+      },
+      "archive": {
+        "success": {
+          "header": "보관",
+          "description": "{{title}}"
+        },
+        "error": {
+          "header": "보관"
+        }
+      },
+      "restore": {
+        "success": {
+          "header": "복원",
+          "description": "{{title}}"
+        },
+        "error": {
+          "header": "복원"
+        }
       }
-    }
+    },
+    "archiveWarning": "보관 {{title}}.",
+    "restoreWarning": "복원 {{title}}."
   },
   "collections": {
     "domain": "컬렉션",

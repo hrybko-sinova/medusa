@@ -41296,6 +41296,7 @@ paths:
                     - proposed
                     - published
                     - rejected
+                    - archived
         - name: sales_channel_id
           in: query
           required: false
@@ -43249,6 +43250,7 @@ paths:
                   - proposed
                   - published
                   - rejected
+                  - archived
               - type: array
                 description: Filter products by multiple statuses.
                 items:
@@ -43259,6 +43261,7 @@ paths:
                     - proposed
                     - published
                     - rejected
+                    - archived
         - name: id
           in: query
           required: false
@@ -72529,6 +72532,7 @@ components:
             - proposed
             - published
             - rejected
+            - archived
         type_id:
           type: string
           title: type_id
@@ -74451,6 +74455,7 @@ components:
             - proposed
             - published
             - rejected
+            - archived
         type_id:
           type: string
           title: type_id
@@ -81750,6 +81755,7 @@ components:
             - proposed
             - published
             - rejected
+            - archived
         options:
           type: array
           description: The product's options.
@@ -86261,6 +86267,7 @@ components:
             - proposed
             - published
             - rejected
+            - archived
         type_id:
           type: string
           title: type_id
@@ -90328,6 +90335,7 @@ components:
             - proposed
             - published
             - rejected
+            - archived
         options:
           type: array
           description: The product's options.
@@ -96681,6 +96689,7 @@ components:
             - proposed
             - published
             - rejected
+            - archived
         options:
           type: array
           description: The product's options.

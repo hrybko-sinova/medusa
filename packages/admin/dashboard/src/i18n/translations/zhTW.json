@@ -141,7 +141,9 @@
     "hide": "隱藏",
     "export": "匯出",
     "import": "匯入",
-    "cannotUndo": "此操作無法復原"
+    "cannotUndo": "此操作無法復原",
+    "archive": "封存",
+    "restore": "還原"
   },
   "operators": {
     "in": "包含於"
@@ -395,14 +397,15 @@
       "required": "新擁有者為必填項。"
     }
   },
-
   "sales_channels": {
     "availableIn": "在 <1>{{y}}</1> 個銷售管道中的 <0>{{x}}</0> 個可用"
   },
   "products": {
     "domain": "商品",
     "list": {
-      "noRecordsMessage": "建立您的第一個商品來開始銷售。"
+      "noRecordsMessage": "建立您的第一個商品來開始銷售。",
+      "showDrafted": "顯示草稿",
+      "showArchived": "顯示已封存"
     },
     "edit": {
       "header": "編輯商品",
@@ -557,7 +560,8 @@
       "draft": "草稿",
       "published": "已發佈",
       "proposed": "待審核",
-      "rejected": "已拒絕"
+      "rejected": "已拒絕",
+      "archived": "已封存"
     },
     "columns": {
       "product_display": "商品",
@@ -749,8 +753,28 @@
         "error": {
           "header": "刪除商品失敗"
         }
+      },
+      "archive": {
+        "success": {
+          "header": "封存",
+          "description": "{{title}}"
+        },
+        "error": {
+          "header": "封存"
+        }
+      },
+      "restore": {
+        "success": {
+          "header": "還原",
+          "description": "{{title}}"
+        },
+        "error": {
+          "header": "還原"
+        }
       }
-    }
+    },
+    "archiveWarning": "封存 {{title}}.",
+    "restoreWarning": "還原 {{title}}."
   },
   "collections": {
     "domain": "商品系列",

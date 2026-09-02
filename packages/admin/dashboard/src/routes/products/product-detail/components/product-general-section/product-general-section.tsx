@@ -1,4 +1,4 @@
-import { GlobeEurope, PencilSquare, Trash } from "@medusajs/icons"
+import { ArchiveBox, ArrowUturnLeft, GlobeEurope, PencilSquare, Trash } from "@medusajs/icons"
 import { HttpTypes } from "@medusajs/types"
 import { Container, Heading, StatusBadge, toast, usePrompt } from "@medusajs/ui"
 import { useTranslation } from "react-i18next"
@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom"
 
 import { ActionMenu } from "../../../../../components/common/action-menu"
 import { SectionRow } from "../../../../../components/common/section"
-import { useDeleteProduct } from "../../../../../hooks/api/products"
+import { useDeleteProduct, useUpdateProduct } from "../../../../../hooks/api/products"
 import { useExtension } from "../../../../../providers/extension-provider"
 import { useFeatureFlag } from "../../../../../providers/feature-flag-provider"
 
@@ -20,6 +20,8 @@ const productStatusColor = (status: string) => {
       return "green"
     case "rejected":
       return "red"
+    case "archived":
+      return "purple"
     default:
       return "grey"
   }
@@ -40,7 +42,9 @@ export const ProductGeneralSection = ({
 
   const displays = getDisplays("product", "general")
 
-  const { mutateAsync } = useDeleteProduct(product.id)
+  const { mutateAsync: deleteProduct } = useDeleteProduct(product.id)
+  const { mutateAsync: updateProduct } = useUpdateProduct(product.id)
+  const isArchived = product.status === "archived"
 
   const handleDelete = async () => {
     const res = await prompt({
@@ -56,7 +60,7 @@ export const ProductGeneralSection = ({
       return
     }
 
-    await mutateAsync(undefined, {
+    await deleteProduct(undefined, {
       onSuccess: () => {
         navigate("..")
       },
@@ -66,6 +70,72 @@ export const ProductGeneralSection = ({
         })
       },
     })
+  }
+
+  const handleArchive = async () => {
+    const res = await prompt({
+      title: t("general.areYouSure"),
+      description: t("products.archiveWarning", {
+        title: product.title,
+      }),
+      confirmText: t("actions.archive"),
+      cancelText: t("actions.cancel"),
+    })
+
+    if (!res) {
+      return
+    }
+
+    await updateProduct(
+      { status: "archived" },
+      {
+        onSuccess: () => {
+          toast.success(t("products.toasts.archive.success.header"), {
+            description: t("products.toasts.archive.success.description", {
+              title: product.title,
+            }),
+          })
+        },
+        onError: (e) => {
+          toast.error(t("products.toasts.archive.error.header"), {
+            description: e.message,
+          })
+        },
+      }
+    )
+  }
+
+  const handleRestore = async () => {
+    const res = await prompt({
+      title: t("general.areYouSure"),
+      description: t("products.restoreWarning", {
+        title: product.title,
+      }),
+      confirmText: t("actions.restore"),
+      cancelText: t("actions.cancel"),
+    })
+
+    if (!res) {
+      return
+    }
+
+    await updateProduct(
+      { status: "draft" },
+      {
+        onSuccess: () => {
+          toast.success(t("products.toasts.restore.success.header"), {
+            description: t("products.toasts.restore.success.description", {
+              title: product.title,
+            }),
+          })
+        },
+        onError: (e) => {
+          toast.error(t("products.toasts.restore.error.header"), {
+            description: e.message,
+          })
+        },
+      }
+    )
   }
 
   return (
@@ -102,6 +172,17 @@ export const ProductGeneralSection = ({
                 : []),
               {
                 actions: [
+                  isArchived
+                    ? {
+                        label: t("actions.restore"),
+                        onClick: handleRestore,
+                        icon: <ArrowUturnLeft />,
+                      }
+                    : {
+                        label: t("actions.archive"),
+                        onClick: handleArchive,
+                        icon: <ArchiveBox />,
+                      },
                   {
                     label: t("actions.delete"),
                     onClick: handleDelete,

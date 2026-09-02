@@ -146,7 +146,9 @@
     "hide": "Ukryj",
     "export": "Eksportuj",
     "import": "Importuj",
-    "cannotUndo": "Tego działania nie można cofnąć"
+    "cannotUndo": "Tego działania nie można cofnąć",
+    "archive": "Archiwizuj",
+    "restore": "Przywróć"
   },
   "operators": {
     "in": "W"
@@ -408,7 +410,9 @@
   "products": {
     "domain": "Produkty",
     "list": {
-      "noRecordsMessage": "Utwórz swój pierwszy produkt, aby rozpocząć sprzedaż."
+      "noRecordsMessage": "Utwórz swój pierwszy produkt, aby rozpocząć sprzedaż.",
+      "showDrafted": "Pokaż szkice",
+      "showArchived": "Pokaż zarchiwizowane"
     },
     "edit": {
       "header": "Edytuj produkt",
@@ -550,7 +554,8 @@
       "draft": "Szkic",
       "published": "Opublikowany",
       "proposed": "Proponowany",
-      "rejected": "Odrzucony"
+      "rejected": "Odrzucony",
+      "archived": "Zarchiwizowany"
     },
     "fields": {
       "title": {
@@ -732,8 +737,28 @@
         "error": {
           "header": "Nie udało się usunąć produktu"
         }
+      },
+      "archive": {
+        "success": {
+          "header": "Archiwizuj",
+          "description": "{{title}}"
+        },
+        "error": {
+          "header": "Archiwizuj"
+        }
+      },
+      "restore": {
+        "success": {
+          "header": "Przywróć",
+          "description": "{{title}}"
+        },
+        "error": {
+          "header": "Przywróć"
+        }
       }
-    }
+    },
+    "archiveWarning": "Archiwizuj {{title}}.",
+    "restoreWarning": "Przywróć {{title}}."
   },
   "collections": {
     "domain": "Kolekcje",

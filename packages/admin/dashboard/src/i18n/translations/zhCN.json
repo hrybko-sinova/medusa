@@ -138,7 +138,9 @@
     "hide": "隐藏",
     "export": "导出",
     "import": "导入",
-    "cannotUndo": "此操作无法撤销"
+    "cannotUndo": "此操作无法撤销",
+    "archive": "归档",
+    "restore": "恢复"
   },
   "operators": {
     "in": "包含"
@@ -398,7 +400,9 @@
   "products": {
     "domain": "产品",
     "list": {
-      "noRecordsMessage": "创建您的第一个产品以开始销售。"
+      "noRecordsMessage": "创建您的第一个产品以开始销售。",
+      "showDrafted": "显示草稿",
+      "showArchived": "显示已归档"
     },
     "edit": {
       "header": "编辑产品",
@@ -534,7 +538,8 @@
       "draft": "草稿",
       "published": "已发布",
       "proposed": "已提议",
-      "rejected": "已拒绝"
+      "rejected": "已拒绝",
+      "archived": "已归档"
     },
     "fields": {
       "title": {
@@ -714,8 +719,28 @@
         "error": {
           "header": "删除产品失败"
         }
+      },
+      "archive": {
+        "success": {
+          "header": "归档",
+          "description": "{{title}}"
+        },
+        "error": {
+          "header": "归档"
+        }
+      },
+      "restore": {
+        "success": {
+          "header": "恢复",
+          "description": "{{title}}"
+        },
+        "error": {
+          "header": "恢复"
+        }
       }
-    }
+    },
+    "archiveWarning": "归档 {{title}}.",
+    "restoreWarning": "恢复 {{title}}."
   },
   "collections": {
     "domain": "系列",
@@ -965,7 +990,7 @@
   "customerGroups": {
     "domain": "客户群组",
     "subtitle": "将客户组织成群组。群组可以有不同的促销和价格。",
-   "list": {
+    "list": {
       "empty": {
         "heading": "暂无客户组",
         "description": "当前没有可显示的客户组。"
@@ -1997,7 +2022,7 @@
     "toasts": {
       "promotionCreateSuccess": "促销活动 ({{code}}) 创建成功。"
     },
-    "create": { },
+    "create": {},
     "edit": {
       "title": "编辑促销详情",
       "rules": {
@@ -2666,7 +2691,10 @@
         "placeholder": "wrong_size",
         "tooltip": "值应该是退货原因的唯一标识符。"
       },
-      "label": { "label": "标签", "placeholder": "错误尺寸" },
+      "label": {
+        "label": "标签",
+        "placeholder": "错误尺寸"
+      },
       "description": {
         "label": "描述",
         "placeholder": "客户收到错误尺寸"

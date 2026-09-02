@@ -82,6 +82,7 @@
  *               - proposed
  *               - published
  *               - rejected
+ *               - archived
  *   - name: sales_channel_id
  *     in: query
  *     required: false

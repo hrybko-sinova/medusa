@@ -13,7 +13,7 @@ type GiftCardProductEditFormProps = {
 }
 
 const EditProductSchema = z.object({
-  status: z.enum(["draft", "published", "proposed", "rejected"]),
+  status: z.enum(["draft", "published", "proposed", "rejected", "archived"]),
   title: z.string().min(1),
   subtitle: z.string().optional(),
   handle: z.string().min(1),
@@ -91,6 +91,7 @@ export const GiftCardProductEditForm = ({
                                 "published",
                                 "proposed",
                                 "rejected",
+                                "archived",
                               ] as const
                             ).map((status) => {
                               return (

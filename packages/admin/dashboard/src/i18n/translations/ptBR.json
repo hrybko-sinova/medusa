@@ -157,7 +157,9 @@
     "import": "Importar",
     "cannotUndo": "Esta ação não pode ser desfeita",
     "manage": "Gerenciar",
-    "goToProductOption": "Ir para opção do produto"
+    "goToProductOption": "Ir para opção do produto",
+    "archive": "Arquivar",
+    "restore": "Restaurar"
   },
   "operators": {
     "in": "Em"
@@ -438,7 +440,9 @@
   "products": {
     "domain": "Produtos",
     "list": {
-      "noRecordsMessage": "Crie seu primeiro produto para começar a vender."
+      "noRecordsMessage": "Crie seu primeiro produto para começar a vender.",
+      "showDrafted": "Mostrar rascunhos",
+      "showArchived": "Mostrar arquivados"
     },
     "edit": {
       "header": "Editar produto",
@@ -594,7 +598,8 @@
       "draft": "Rascunho",
       "published": "Publicado",
       "proposed": "Proposto",
-      "rejected": "Rejeitado"
+      "rejected": "Rejeitado",
+      "archived": "Arquivado"
     },
     "columns": {
       "product_display": "Produto",
@@ -796,8 +801,28 @@
         "error": {
           "header": "Falha ao excluir produto"
         }
+      },
+      "archive": {
+        "success": {
+          "header": "Arquivar",
+          "description": "{{title}}"
+        },
+        "error": {
+          "header": "Arquivar"
+        }
+      },
+      "restore": {
+        "success": {
+          "header": "Restaurar",
+          "description": "{{title}}"
+        },
+        "error": {
+          "header": "Restaurar"
+        }
       }
-    }
+    },
+    "archiveWarning": "Arquivar {{title}}.",
+    "restoreWarning": "Restaurar {{title}}."
   },
   "collections": {
     "domain": "Coleções",

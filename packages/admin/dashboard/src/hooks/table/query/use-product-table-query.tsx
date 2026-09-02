@@ -1,4 +1,6 @@
 import { HttpTypes } from "@medusajs/types"
+
+import { resolveProductListStatuses } from "../../../lib/product-list-status"
 import { useQueryParams } from "../../use-query-params"
 
 type UseProductTableQueryProps = {
@@ -29,6 +31,8 @@ export const useProductTableQuery = ({
       "type_id",
       "status",
       "id",
+      "show_drafted",
+      "show_archived",
     ],
     prefix
   )
@@ -46,6 +50,8 @@ export const useProductTableQuery = ({
     status,
     order,
     q,
+    show_drafted,
+    show_archived,
   } = queryObject
 
   const searchParams: HttpTypes.AdminProductListParams = {
@@ -60,7 +66,11 @@ export const useProductTableQuery = ({
     order: order,
     tag_id: tag_id ? tag_id.split(",") : undefined,
     type_id: type_id?.split(","),
-    status: status?.split(",") as HttpTypes.AdminProductStatus[],
+    status: resolveProductListStatuses({
+      status: status?.split(","),
+      showDrafted: show_drafted === "true",
+      showArchived: show_archived === "true",
+    }),
     q,
     fields: DEFAULT_FIELDS,
   }

@@ -619,6 +619,12 @@
         },
         "goToProductOption": {
           "type": "string"
+        },
+        "archive": {
+          "type": "string"
+        },
+        "restore": {
+          "type": "string"
         }
       },
       "required": [
@@ -670,7 +676,9 @@
         "import",
         "cannotUndo",
         "manage",
-        "goToProductOption"
+        "goToProductOption",
+        "archive",
+        "restore"
       ],
       "additionalProperties": false
     },
@@ -1751,9 +1759,15 @@
           "properties": {
             "noRecordsMessage": {
               "type": "string"
+            },
+            "showDrafted": {
+              "type": "string"
+            },
+            "showArchived": {
+              "type": "string"
             }
           },
-          "required": ["noRecordsMessage"],
+          "required": ["noRecordsMessage", "showDrafted", "showArchived"],
           "additionalProperties": false
         },
         "edit": {
@@ -2081,6 +2095,12 @@
         "deleteWarning": {
           "type": "string"
         },
+        "archiveWarning": {
+          "type": "string"
+        },
+        "restoreWarning": {
+          "type": "string"
+        },
         "variants": {
           "type": "object",
           "properties": {
@@ -2352,9 +2372,12 @@
             },
             "rejected": {
               "type": "string"
+            },
+            "archived": {
+              "type": "string"
             }
           },
-          "required": ["draft", "published", "proposed", "rejected"],
+          "required": ["draft", "published", "proposed", "rejected", "archived"],
           "additionalProperties": false
         },
         "columns": {
@@ -3096,9 +3119,69 @@
               },
               "required": ["success", "error"],
               "additionalProperties": false
+            },
+            "archive": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "object",
+                  "properties": {
+                    "header": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["header", "description"],
+                  "additionalProperties": false
+                },
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "header": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["header"],
+                  "additionalProperties": false
+                }
+              },
+              "required": ["success", "error"],
+              "additionalProperties": false
+            },
+            "restore": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "object",
+                  "properties": {
+                    "header": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["header", "description"],
+                  "additionalProperties": false
+                },
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "header": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["header"],
+                  "additionalProperties": false
+                }
+              },
+              "required": ["success", "error"],
+              "additionalProperties": false
             }
           },
-          "required": ["delete"],
+          "required": ["delete", "archive", "restore"],
           "additionalProperties": false
         }
       },
@@ -3110,6 +3193,8 @@
         "export",
         "import",
         "deleteWarning",
+        "archiveWarning",
+        "restoreWarning",
         "variants",
         "attributes",
         "editAttributes",

@@ -137,7 +137,9 @@
     "hide": "Masquer",
     "export": "Exporter",
     "import": "Importer",
-    "cannotUndo": "Cette action ne peut pas être annulée"
+    "cannotUndo": "Cette action ne peut pas être annulée",
+    "archive": "Archiver",
+    "restore": "Restaurer"
   },
   "operators": {
     "in": "inclus"
@@ -385,7 +387,9 @@
   "products": {
     "domain": "Produits",
     "list": {
-      "noRecordsMessage": "Créez votre premier produit pour commencer à vendre."
+      "noRecordsMessage": "Créez votre premier produit pour commencer à vendre.",
+      "showDrafted": "Afficher les brouillons",
+      "showArchived": "Afficher les archivés"
     },
     "edit": {
       "header": "Modifier le produit",
@@ -521,7 +525,8 @@
       "draft": "Brouillon",
       "published": "Publié",
       "proposed": "Proposé",
-      "rejected": "Rejeté"
+      "rejected": "Rejeté",
+      "archived": "Archivé"
     },
     "fields": {
       "title": {
@@ -674,8 +679,28 @@
         "error": {
           "header": "Erreur lors de la suppression du produit"
         }
+      },
+      "archive": {
+        "success": {
+          "header": "Archiver",
+          "description": "{{title}}"
+        },
+        "error": {
+          "header": "Archiver"
+        }
+      },
+      "restore": {
+        "success": {
+          "header": "Restaurer",
+          "description": "{{title}}"
+        },
+        "error": {
+          "header": "Restaurer"
+        }
       }
-    }
+    },
+    "archiveWarning": "Archiver {{title}}.",
+    "restoreWarning": "Restaurer {{title}}."
   },
   "collections": {
     "domain": "Collections",
@@ -2447,7 +2472,10 @@
         "placeholder": "mauvaise_taille",
         "tooltip": "La valeur doit être un identifiant unique pour la raison de retour."
       },
-      "label": { "label": "Label", "placeholder": "Mauvaise taille" },
+      "label": {
+        "label": "Label",
+        "placeholder": "Mauvaise taille"
+      },
       "description": {
         "label": "Description",
         "placeholder": "Le client a reçu la mauvaise taille"

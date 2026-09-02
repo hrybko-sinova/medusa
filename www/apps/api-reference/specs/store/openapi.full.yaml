@@ -14451,6 +14451,7 @@ components:
             - proposed
             - published
             - rejected
+            - archived
         type_id:
           type: string
           title: type_id
@@ -16373,6 +16374,7 @@ components:
             - proposed
             - published
             - rejected
+            - archived
         type_id:
           type: string
           title: type_id
@@ -23675,6 +23677,7 @@ components:
             - proposed
             - published
             - rejected
+            - archived
         options:
           type: array
           description: The product's options.
@@ -28186,6 +28189,7 @@ components:
             - proposed
             - published
             - rejected
+            - archived
         type_id:
           type: string
           title: type_id
@@ -32253,6 +32257,7 @@ components:
             - proposed
             - published
             - rejected
+            - archived
         options:
           type: array
           description: The product's options.
@@ -38606,6 +38611,7 @@ components:
             - proposed
             - published
             - rejected
+            - archived
         options:
           type: array
           description: The product's options.

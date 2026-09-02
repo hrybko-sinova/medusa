@@ -267,6 +267,47 @@ medusaIntegrationTestRunner({
           )
         })
 
+        it("updates a product status to archived and filters by archived", async () => {
+          const payload = {
+            status: "archived",
+          }
+
+          const updateResponse = await api.post(
+            `/admin/products/${baseProduct.id}`,
+            payload,
+            adminHeaders
+          )
+
+          expect(updateResponse.status).toEqual(200)
+          expect(updateResponse.data.product).toEqual(
+            expect.objectContaining({
+              id: baseProduct.id,
+              status: "archived",
+            })
+          )
+
+          const response = await api.get(
+            "/admin/products?status[]=archived",
+            adminHeaders
+          )
+
+          expect(response.status).toEqual(200)
+          expect(response.data.products).toEqual(
+            expect.arrayContaining([
+              expect.objectContaining({
+                id: baseProduct.id,
+                status: "archived",
+              }),
+            ])
+          )
+          expect(response.data.products).toEqual(
+            expect.not.arrayContaining([
+              expect.objectContaining({ status: "published" }),
+              expect.objectContaining({ status: "proposed" }),
+            ])
+          )
+        })
+
         it("returns a list of products where status is proposed or published", async () => {
           const notExpected = [
             expect.objectContaining({ status: "draft" }),

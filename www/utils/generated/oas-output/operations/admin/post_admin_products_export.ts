@@ -558,6 +558,7 @@
  *             - proposed
  *             - published
  *             - rejected
+ *             - archived
  *         - type: array
  *           description: Filter products by multiple statuses.
  *           items:
@@ -568,6 +569,7 @@
  *               - proposed
  *               - published
  *               - rejected
+ *               - archived
  *   - name: id
  *     in: query
  *     required: false

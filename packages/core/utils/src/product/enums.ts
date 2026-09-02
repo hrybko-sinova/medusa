@@ -3,4 +3,5 @@ export enum ProductStatus {
   PROPOSED = "proposed",
   PUBLISHED = "published",
   REJECTED = "rejected",
+  ARCHIVED = "archived",
 }

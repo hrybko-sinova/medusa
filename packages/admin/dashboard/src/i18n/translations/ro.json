@@ -137,7 +137,9 @@
     "hide": "Ascunde",
     "export": "Export",
     "import": "Import",
-    "cannotUndo": "Această acțiune nu poate fi anulată"
+    "cannotUndo": "Această acțiune nu poate fi anulată",
+    "archive": "Arhivează",
+    "restore": "Restaurează"
   },
   "operators": {
     "in": "În"
@@ -396,7 +398,9 @@
   "products": {
     "domain": "Produse",
     "list": {
-      "noRecordsMessage": "Creați primul dvs. produs pentru a începe să vindeți."
+      "noRecordsMessage": "Creați primul dvs. produs pentru a începe să vindeți.",
+      "showDrafted": "Afișează ciornele",
+      "showArchived": "Afișează arhivatele"
     },
     "edit": {
       "header": "Editați produsul",
@@ -530,7 +534,8 @@
       "draft": "Proiect",
       "published": "Publicat",
       "proposed": "Propus",
-      "rejected": "Respins"
+      "rejected": "Respins",
+      "archived": "Arhivat"
     },
     "fields": {
       "title": {
@@ -692,10 +697,30 @@
         "error": {
           "header": "Produsul nu a putut fi șters"
         }
+      },
+      "archive": {
+        "success": {
+          "header": "Arhivează",
+          "description": "{{title}}"
+        },
+        "error": {
+          "header": "Arhivează"
+        }
+      },
+      "restore": {
+        "success": {
+          "header": "Restaurează",
+          "description": "{{title}}"
+        },
+        "error": {
+          "header": "Restaurează"
+        }
       }
     },
     "variantCount_one": "{{count}} variantă",
-    "variantCount_other": "{{count}} variante"
+    "variantCount_other": "{{count}} variante",
+    "archiveWarning": "Arhivează {{title}}.",
+    "restoreWarning": "Restaurează {{title}}."
   },
   "collections": {
     "domain": "Colecții",

@@ -66,6 +66,7 @@
  *       - proposed
  *       - published
  *       - rejected
+ *       - archived
  *   options:
  *     type: array
  *     description: The product's options.

@@ -847,7 +847,8 @@
             "draft",
             "proposed",
             "published",
-            "rejected"
+            "rejected",
+            "archived"
           ],
           "mappedType": "enum"
         },

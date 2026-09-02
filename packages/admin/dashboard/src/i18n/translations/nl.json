@@ -138,7 +138,9 @@
     "hide": "Verbergen",
     "export": "Exporteren",
     "import": "Importeren",
-    "cannotUndo": "Deze actie kan niet ongedaan worden gemaakt"
+    "cannotUndo": "Deze actie kan niet ongedaan worden gemaakt",
+    "archive": "Archiveren",
+    "restore": "Herstellen"
   },
   "operators": {
     "in": "In"
@@ -398,7 +400,9 @@
   "products": {
     "domain": "Producten",
     "list": {
-      "noRecordsMessage": "Maak uw eerste product aan om te beginnen met verkopen."
+      "noRecordsMessage": "Maak uw eerste product aan om te beginnen met verkopen.",
+      "showDrafted": "Concepten tonen",
+      "showArchived": "Gearchiveerde tonen"
     },
     "edit": {
       "header": "Product bewerken",
@@ -534,7 +538,8 @@
       "draft": "Concept",
       "published": "Gepubliceerd",
       "proposed": "Voorgesteld",
-      "rejected": "Afgewezen"
+      "rejected": "Afgewezen",
+      "archived": "Gearchiveerd"
     },
     "fields": {
       "title": {
@@ -710,8 +715,28 @@
         "error": {
           "header": "Verwijderen van product mislukt"
         }
+      },
+      "archive": {
+        "success": {
+          "header": "Archiveren",
+          "description": "{{title}}"
+        },
+        "error": {
+          "header": "Archiveren"
+        }
+      },
+      "restore": {
+        "success": {
+          "header": "Herstellen",
+          "description": "{{title}}"
+        },
+        "error": {
+          "header": "Herstellen"
+        }
       }
-    }
+    },
+    "archiveWarning": "Archiveren {{title}}.",
+    "restoreWarning": "Herstellen {{title}}."
   },
   "collections": {
     "domain": "Collecties",
@@ -2654,7 +2679,10 @@
         "placeholder": "verkeerde_maat",
         "tooltip": "De waarde moet een unieke identificatie zijn voor de retourreden."
       },
-      "label": { "label": "Label", "placeholder": "Verkeerde maat" },
+      "label": {
+        "label": "Label",
+        "placeholder": "Verkeerde maat"
+      },
       "description": {
         "label": "Beschrijving",
         "placeholder": "Klant ontving de verkeerde maat"

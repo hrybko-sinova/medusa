@@ -138,7 +138,9 @@
     "hide": "Paslėpti",
     "export": "Eksportuoti",
     "import": "Importuoti",
-    "cannotUndo": "Šio veiksmo pasekmės neatstatomos"
+    "cannotUndo": "Šio veiksmo pasekmės neatstatomos",
+    "archive": "Archyvuoti",
+    "restore": "Atkurti"
   },
   "operators": {
     "in": "Iš"
@@ -398,7 +400,9 @@
   "products": {
     "domain": "Prekės",
     "list": {
-      "noRecordsMessage": "Sukurkite pirmą savo prekę, kad pradėtumėte parduoti."
+      "noRecordsMessage": "Sukurkite pirmą savo prekę, kad pradėtumėte parduoti.",
+      "showDrafted": "Rodyti juodraščius",
+      "showArchived": "Rodyti archyvuotus"
     },
     "edit": {
       "header": "Keisti prekę",
@@ -534,7 +538,8 @@
       "draft": "Juodraštis",
       "published": "Publikuojama",
       "proposed": "Pasiūlyta",
-      "rejected": "Atmesta"
+      "rejected": "Atmesta",
+      "archived": "Suarchyvuota"
     },
     "fields": {
       "title": {
@@ -714,8 +719,28 @@
         "error": {
           "header": "Nepavyko pašalinti prekės"
         }
+      },
+      "archive": {
+        "success": {
+          "header": "Archyvuoti",
+          "description": "{{title}}"
+        },
+        "error": {
+          "header": "Archyvuoti"
+        }
+      },
+      "restore": {
+        "success": {
+          "header": "Atkurti",
+          "description": "{{title}}"
+        },
+        "error": {
+          "header": "Atkurti"
+        }
       }
-    }
+    },
+    "archiveWarning": "Archyvuoti {{title}}.",
+    "restoreWarning": "Atkurti {{title}}."
   },
   "collections": {
     "domain": "Kolekcijos",
@@ -2656,7 +2681,10 @@
         "placeholder": "klaidingas_dydis",
         "tooltip": "Vertė turėtų būti unikalus grąžinimo priežasties identifikatorius."
       },
-      "label": { "label": "Antraštė", "placeholder": "Klaidingas dydis" },
+      "label": {
+        "label": "Antraštė",
+        "placeholder": "Klaidingas dydis"
+      },
       "description": {
         "label": "Aprašymas",
         "placeholder": "Klientas gavo netinkamą dydį"

@@ -137,7 +137,9 @@
     "hide": "Приховати",
     "export": "Експортувати",
     "import": "Імпортувати",
-    "cannotUndo": "Цю дію не можна скасувати"
+    "cannotUndo": "Цю дію не можна скасувати",
+    "archive": "Архівувати",
+    "restore": "Відновити"
   },
   "operators": {
     "in": "У"
@@ -385,7 +387,9 @@
   "products": {
     "domain": "Продукти",
     "list": {
-      "noRecordsMessage": "Створіть перший продукт, щоб почати продавати."
+      "noRecordsMessage": "Створіть перший продукт, щоб почати продавати.",
+      "showDrafted": "Показати чернетки",
+      "showArchived": "Показати архівовані"
     },
     "edit": {
       "header": "Редагувати продукт",
@@ -521,7 +525,8 @@
       "draft": "Чернетка",
       "published": "Опубліковано",
       "proposed": "Запропоновано",
-      "rejected": "Відхилено"
+      "rejected": "Відхилено",
+      "archived": "Архівовано"
     },
     "fields": {
       "title": {
@@ -674,8 +679,28 @@
         "error": {
           "header": "Не вдалося видалити продукт"
         }
+      },
+      "archive": {
+        "success": {
+          "header": "Архівувати",
+          "description": "{{title}}"
+        },
+        "error": {
+          "header": "Архівувати"
+        }
+      },
+      "restore": {
+        "success": {
+          "header": "Відновити",
+          "description": "{{title}}"
+        },
+        "error": {
+          "header": "Відновити"
+        }
       }
-    }
+    },
+    "archiveWarning": "Архівувати {{title}}.",
+    "restoreWarning": "Відновити {{title}}."
   },
   "collections": {
     "domain": "Колекції",
@@ -2509,7 +2534,10 @@
         "placeholder": "неправильний_розмір",
         "tooltip": "Значення має бути унікальним ідентифікатором для причини повернення."
       },
-      "label": { "label": "Мітка", "placeholder": "Неправильний розмір" },
+      "label": {
+        "label": "Мітка",
+        "placeholder": "Неправильний розмір"
+      },
       "description": {
         "label": "Опис",
         "placeholder": "Клієнт отримав неправильний розмір"

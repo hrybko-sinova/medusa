@@ -411,7 +411,9 @@
     "products": {
       "domain": "Produkty",
       "list": {
-        "noRecordsMessage": "Vytvořte svůj první produkt a začněte prodávat."
+        "noRecordsMessage": "Vytvořte svůj první produkt a začněte prodávat.",
+      "showDrafted": "Zobrazit koncepty",
+      "showArchived": "Zobrazit archivované"
       },
       "edit": {
         "header": "Upravit produkt",

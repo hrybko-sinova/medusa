@@ -9,7 +9,12 @@ import { BaseProductType } from "../product-type/common"
 /**
  * The product's status.
  */
-export type ProductStatus = "draft" | "proposed" | "published" | "rejected"
+export type ProductStatus =
+  | "draft"
+  | "proposed"
+  | "published"
+  | "rejected"
+  | "archived"
 /**
  * The product's details.
  */

@@ -148,7 +148,9 @@
     "hide": "Hide",
     "export": "Export",
     "import": "Import",
-    "cannotUndo": "This action cannot be undone"
+    "cannotUndo": "This action cannot be undone",
+    "archive": "Archive",
+    "restore": "Restore"
   },
   "operators": {
     "in": "In"
@@ -412,7 +414,9 @@
   "products": {
     "domain": "Products",
     "list": {
-      "noRecordsMessage": "Create your first product to start selling."
+      "noRecordsMessage": "Create your first product to start selling.",
+      "showDrafted": "Show drafted",
+      "showArchived": "Show archived"
     },
     "edit": {
       "header": "Edit Product",
@@ -567,7 +571,8 @@
       "draft": "Draft",
       "published": "Published",
       "proposed": "Proposed",
-      "rejected": "Rejected"
+      "rejected": "Rejected",
+      "archived": "Archived"
     },
     "columns": {
       "product_display": "Product",
@@ -759,8 +764,28 @@
         "error": {
           "header": "Failed to delete product"
         }
+      },
+      "archive": {
+        "success": {
+          "header": "Product archived",
+          "description": "{{title}} was successfully archived."
+        },
+        "error": {
+          "header": "Failed to archive product"
+        }
+      },
+      "restore": {
+        "success": {
+          "header": "Product restored",
+          "description": "{{title}} was restored as a draft."
+        },
+        "error": {
+          "header": "Failed to restore product"
+        }
       }
-    }
+    },
+    "archiveWarning": "You are about to archive the product {{title}}. It will be hidden from the storefront until it is restored.",
+    "restoreWarning": "You are about to restore the product {{title}}. It will return as a draft."
   },
   "collections": {
     "domain": "Collections",

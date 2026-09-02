@@ -1,5 +1,6 @@
 import { HttpTypes } from "@medusajs/types"
 import { useProducts } from "../../../../../hooks/api/products"
+import { resolveProductListStatuses } from "../../../../../lib/product-list-status"
 import {
   createTableAdapter,
   TableAdapter,
@@ -18,6 +19,7 @@ export function createProductTableAdapter(): TableAdapter<HttpTypes.AdminProduct
         {
           fields,
           ...params,
+          status: resolveProductListStatuses({ status: params.status }),
           is_giftcard: false, // Exclude gift cards from product list
         },
         {

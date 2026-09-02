@@ -4,6 +4,7 @@ enum ProductStatus {
   proposed
   published
   rejected
+  archived
 }
 
 type Product {

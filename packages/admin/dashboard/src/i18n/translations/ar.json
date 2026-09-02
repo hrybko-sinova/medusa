@@ -137,7 +137,9 @@
     "hide": "إخفاء",
     "export": "تصدير",
     "import": "استيراد",
-    "cannotUndo": "لا يمكن التراجع عن هذا الإجراء"
+    "cannotUndo": "لا يمكن التراجع عن هذا الإجراء",
+    "archive": "أرشفة",
+    "restore": "استعادة"
   },
   "operators": {
     "in": "في"
@@ -419,7 +421,9 @@
     },
     "domain": "المنتجات",
     "list": {
-      "noRecordsMessage": "أنشئ منتجك الأول لبدء البيع."
+      "noRecordsMessage": "أنشئ منتجك الأول لبدء البيع.",
+      "showDrafted": "إظهار المسودات",
+      "showArchived": "إظهار المؤرشفة"
     },
     "edit": {
       "header": "تحرير المنتج",
@@ -555,7 +559,8 @@
       "draft": "مسودة",
       "published": "منشور",
       "proposed": "مقترح",
-      "rejected": "مرفوض"
+      "rejected": "مرفوض",
+      "archived": "مؤرشف"
     },
     "fields": {
       "shipping_profile": {
@@ -712,8 +717,28 @@
         "error": {
           "header": "فشل في حذف المنتج"
         }
+      },
+      "archive": {
+        "success": {
+          "header": "أرشفة",
+          "description": "{{title}}"
+        },
+        "error": {
+          "header": "أرشفة"
+        }
+      },
+      "restore": {
+        "success": {
+          "header": "استعادة",
+          "description": "{{title}}"
+        },
+        "error": {
+          "header": "استعادة"
+        }
       }
-    }
+    },
+    "archiveWarning": "أرشفة {{title}}.",
+    "restoreWarning": "استعادة {{title}}."
   },
   "collections": {
     "domain": "المجموعات",
@@ -2605,7 +2630,10 @@
         "placeholder": "خطأ في الحجم",
         "tooltip": "يجب أن تكون القيمة معرفًا فريدًا لسبب الإرجاع."
       },
-      "label": { "label": "التسمية", "placeholder": "خطأ في الحجم" },
+      "label": {
+        "label": "التسمية",
+        "placeholder": "خطأ في الحجم"
+      },
       "description": {
         "label": "الوصف",
         "placeholder": "تلقى العميل الحجم الخطأ"

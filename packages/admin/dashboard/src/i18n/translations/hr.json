@@ -148,7 +148,9 @@
     "hide": "Sakrij",
     "export": "Izvezi",
     "import": "Uvezi",
-    "cannotUndo": "Ova radnja se ne može poništiti"
+    "cannotUndo": "Ova radnja se ne može poništiti",
+    "archive": "Arhiviraj",
+    "restore": "Vrati"
   },
   "operators": {
     "in": "U"
@@ -411,7 +413,9 @@
   "products": {
     "domain": "Proizvodi",
     "list": {
-      "noRecordsMessage": "Kreirajte svoj prvi proizvod da biste počeli prodavati."
+      "noRecordsMessage": "Kreirajte svoj prvi proizvod da biste počeli prodavati.",
+      "showDrafted": "Prikaži skice",
+      "showArchived": "Prikaži arhivirane"
     },
     "edit": {
       "header": "Izmjena proizvoda",
@@ -566,7 +570,8 @@
       "draft": "Nacrt",
       "published": "Objavljeno",
       "proposed": "Predloženo",
-      "rejected": "Odbijeno"
+      "rejected": "Odbijeno",
+      "archived": "Arhivirano"
     },
     "columns": {
       "product_display": "Proizvod",
@@ -758,8 +763,28 @@
         "error": {
           "header": "Brisanje proizvoda nije uspjelo"
         }
+      },
+      "archive": {
+        "success": {
+          "header": "Arhiviraj",
+          "description": "{{title}}"
+        },
+        "error": {
+          "header": "Arhiviraj"
+        }
+      },
+      "restore": {
+        "success": {
+          "header": "Vrati",
+          "description": "{{title}}"
+        },
+        "error": {
+          "header": "Vrati"
+        }
       }
-    }
+    },
+    "archiveWarning": "Arhiviraj {{title}}.",
+    "restoreWarning": "Vrati {{title}}."
   },
   "collections": {
     "domain": "Kolekcije",

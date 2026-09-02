@@ -157,7 +157,9 @@
     "import": "وارد کردن",
     "cannotUndo": "این عمل قابل بازگشت نیست",
     "manage": "مدیریت",
-    "goToProductOption": "رفتن به گزینه محصول"
+    "goToProductOption": "رفتن به گزینه محصول",
+    "archive": "بایگانی",
+    "restore": "بازیابی"
   },
   "operators": {
     "in": "در"
@@ -439,7 +441,9 @@
   "products": {
     "domain": "محصولات",
     "list": {
-      "noRecordsMessage": "اولین محصول خود را ایجاد کنید تا شروع به فروش کنید."
+      "noRecordsMessage": "اولین محصول خود را ایجاد کنید تا شروع به فروش کنید.",
+      "showDrafted": "نمایش پیش‌نویس‌ها",
+      "showArchived": "نمایش بایگانی‌شده‌ها"
     },
     "edit": {
       "header": "ویرایش محصول",
@@ -595,7 +599,8 @@
       "draft": "پیش‌نویس",
       "published": "منتشر شده",
       "proposed": "پیشنهادی",
-      "rejected": "رد شده"
+      "rejected": "رد شده",
+      "archived": "بایگانی‌شده"
     },
     "columns": {
       "product_display": "محصول",
@@ -797,8 +802,28 @@
         "error": {
           "header": "حذف محصول با شکست مواجه شد"
         }
+      },
+      "archive": {
+        "success": {
+          "header": "بایگانی",
+          "description": "{{title}}"
+        },
+        "error": {
+          "header": "بایگانی"
+        }
+      },
+      "restore": {
+        "success": {
+          "header": "بازیابی",
+          "description": "{{title}}"
+        },
+        "error": {
+          "header": "بازیابی"
+        }
       }
-    }
+    },
+    "archiveWarning": "بایگانی {{title}}.",
+    "restoreWarning": "بازیابی {{title}}."
   },
   "collections": {
     "domain": "مجموعه‌ها",

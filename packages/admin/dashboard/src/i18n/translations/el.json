@@ -83,7 +83,6 @@
       "labels": {
         "key": "Κλειδί",
         "value": "Τιμή"
-        
       },
       "complexRow": {
         "label": "Ορισμένες γραμμές είναι απενεργοποιημένες",
@@ -138,7 +137,9 @@
     "hide": "Απόκρυψη",
     "export": "Εξαγωγή",
     "import": "Εισαγωγή",
-    "cannotUndo": "Αυτή η ενέργεια δεν μπορεί να αναιρεθεί"
+    "cannotUndo": "Αυτή η ενέργεια δεν μπορεί να αναιρεθεί",
+    "archive": "Αρχειοθέτηση",
+    "restore": "Επαναφορά"
   },
   "operators": {
     "in": "Σε"
@@ -397,7 +398,9 @@
   "products": {
     "domain": "Προϊόντα",
     "list": {
-      "noRecordsMessage": "Δημιουργήστε το πρώτο σας προϊόν για να ξεκινήσετε τις πωλήσεις."
+      "noRecordsMessage": "Δημιουργήστε το πρώτο σας προϊόν για να ξεκινήσετε τις πωλήσεις.",
+      "showDrafted": "Εμφάνιση προχείρων",
+      "showArchived": "Εμφάνιση αρχειοθετημένων"
     },
     "edit": {
       "header": "Επεξεργασία προϊόντος",
@@ -533,7 +536,8 @@
       "draft": "Πρόχειρο",
       "published": "Δημοσιευμένο",
       "proposed": "Προτεινόμενο",
-      "rejected": "Απορριφθέν"
+      "rejected": "Απορριφθέν",
+      "archived": "Αρχειοθετημένο"
     },
     "fields": {
       "title": {
@@ -713,8 +717,28 @@
         "error": {
           "header": "Αποτυχία διαγραφής προϊόντος"
         }
+      },
+      "archive": {
+        "success": {
+          "header": "Αρχειοθέτηση",
+          "description": "{{title}}"
+        },
+        "error": {
+          "header": "Αρχειοθέτηση"
+        }
+      },
+      "restore": {
+        "success": {
+          "header": "Επαναφορά",
+          "description": "{{title}}"
+        },
+        "error": {
+          "header": "Επαναφορά"
+        }
       }
-    }
+    },
+    "archiveWarning": "Αρχειοθέτηση {{title}}.",
+    "restoreWarning": "Επαναφορά {{title}}."
   },
   "collections": {
     "domain": "Συλλογές",

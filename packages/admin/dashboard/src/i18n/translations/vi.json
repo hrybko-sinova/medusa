@@ -138,7 +138,9 @@
     "hide": "Ẩn",
     "export": "Xuất",
     "import": "Nhập",
-    "cannotUndo": "Hành động này không thể hoàn tác"
+    "cannotUndo": "Hành động này không thể hoàn tác",
+    "archive": "Lưu trữ",
+    "restore": "Khôi phục"
   },
   "operators": {
     "in": "Trong"
@@ -398,7 +400,9 @@
   "products": {
     "domain": "Sản phẩm",
     "list": {
-      "noRecordsMessage": "Tạo sản phẩm đầu tiên của bạn để bắt đầu bán hàng."
+      "noRecordsMessage": "Tạo sản phẩm đầu tiên của bạn để bắt đầu bán hàng.",
+      "showDrafted": "Hiện bản nháp",
+      "showArchived": "Hiện đã lưu trữ"
     },
     "edit": {
       "header": "Chỉnh sửa sản phẩm",
@@ -534,7 +538,8 @@
       "draft": "Nháp",
       "published": "Đã xuất bản",
       "proposed": "Đã đề xuất",
-      "rejected": "Đã từ chối"
+      "rejected": "Đã từ chối",
+      "archived": "Đã lưu trữ"
     },
     "fields": {
       "title": {
@@ -714,8 +719,28 @@
         "error": {
           "header": "Không thể xóa sản phẩm"
         }
+      },
+      "archive": {
+        "success": {
+          "header": "Lưu trữ",
+          "description": "{{title}}"
+        },
+        "error": {
+          "header": "Lưu trữ"
+        }
+      },
+      "restore": {
+        "success": {
+          "header": "Khôi phục",
+          "description": "{{title}}"
+        },
+        "error": {
+          "header": "Khôi phục"
+        }
       }
-    }
+    },
+    "archiveWarning": "Lưu trữ {{title}}.",
+    "restoreWarning": "Khôi phục {{title}}."
   },
   "collections": {
     "domain": "Bộ sưu tập",
@@ -2697,7 +2722,10 @@
         "placeholder": "wrong_size",
         "tooltip": "Giá trị nên là một định danh duy nhất cho lý do trả hàng."
       },
-      "label": { "label": "Nhãn", "placeholder": "Kích thước sai" },
+      "label": {
+        "label": "Nhãn",
+        "placeholder": "Kích thước sai"
+      },
       "description": {
         "label": "Mô tả",
         "placeholder": "Khách hàng nhận nhầm kích thước"

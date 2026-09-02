@@ -679,6 +679,31 @@ medusaIntegrationTestRunner({
         ])
       })
 
+      it("should not list or retrieve archived products", async () => {
+        await api.post(
+          `/admin/products/${product4.id}`,
+          { status: ProductStatus.ARCHIVED },
+          adminHeaders
+        )
+
+        const listResponse = await api.get(`/store/products`, storeHeaders)
+
+        expect(listResponse.status).toEqual(200)
+        expect(listResponse.data.products).toEqual(
+          expect.not.arrayContaining([
+            expect.objectContaining({
+              id: product4.id,
+            }),
+          ])
+        )
+
+        const error = await api
+          .get(`/store/products/${product4.id}`, storeHeaders)
+          .catch((e) => e)
+
+        expect(error.response.status).toEqual(404)
+      })
+
       it("should list all products with images ordered by rank", async () => {
         const response = await api.get("/store/products", storeHeaders)
 

@@ -148,7 +148,9 @@
     "hide": "ซ่อน",
     "export": "ส่งออก",
     "import": "นำเข้า",
-    "cannotUndo": "การดำเนินการนี้ไม่สามารถย้อนกลับได้"
+    "cannotUndo": "การดำเนินการนี้ไม่สามารถย้อนกลับได้",
+    "archive": "เก็บถาวร",
+    "restore": "กู้คืน"
   },
   "operators": {
     "in": "ใน"
@@ -411,7 +413,9 @@
   "products": {
     "domain": "สินค้า",
     "list": {
-      "noRecordsMessage": "สร้างสินค้าชิ้นแรกของคุณเพื่อเริ่มต้นการขาย"
+      "noRecordsMessage": "สร้างสินค้าชิ้นแรกของคุณเพื่อเริ่มต้นการขาย",
+      "showDrafted": "แสดงฉบับร่าง",
+      "showArchived": "แสดงที่เก็บถาวร"
     },
     "edit": {
       "header": "แก้ไขสินค้า",
@@ -566,7 +570,8 @@
       "draft": "ฉบับร่าง",
       "published": "เผยแพร่",
       "proposed": "เสนอ",
-      "rejected": "ถูกปฏิเสธ"
+      "rejected": "ถูกปฏิเสธ",
+      "archived": "ถูกเก็บถาวร"
     },
     "columns": {
       "product_display": "สินค้า",
@@ -758,8 +763,28 @@
         "error": {
           "header": "ลบสินค้าล้มเหลว"
         }
+      },
+      "archive": {
+        "success": {
+          "header": "เก็บถาวร",
+          "description": "{{title}}"
+        },
+        "error": {
+          "header": "เก็บถาวร"
+        }
+      },
+      "restore": {
+        "success": {
+          "header": "กู้คืน",
+          "description": "{{title}}"
+        },
+        "error": {
+          "header": "กู้คืน"
+        }
       }
-    }
+    },
+    "archiveWarning": "เก็บถาวร {{title}}.",
+    "restoreWarning": "กู้คืน {{title}}."
   },
   "collections": {
     "domain": "คอลเลกชัน",

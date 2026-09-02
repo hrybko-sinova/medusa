@@ -9,6 +9,7 @@ import { HttpTypes } from "@medusajs/types"
 import { _DataTable } from "../../../../../components/table/data-table"
 import { useProducts } from "../../../../../hooks/api/products"
 import { ProductActions } from "./product-list-table-actions"
+import { ProductVisibilitySwitches } from "./product-visibility-switches"
 import { useProductTableColumns } from "../../../../../hooks/table/columns/use-product-table-columns"
 import { useProductTableFilters } from "../../../../../hooks/table/filters/use-product-table-filters"
 import { useProductTableQuery } from "../../../../../hooks/table/query/use-product-table-query"
@@ -57,16 +58,19 @@ export const ProductListTable = () => {
     <Container className="divide-y p-0">
       <div className="flex items-center justify-between px-6 py-4">
         <Heading level="h1">{t("products.domain")}</Heading>
-        <div className="flex items-center justify-center gap-x-2">
-          <Button size="small" variant="secondary" asChild>
-            <Link to={`export${location.search}`}>{t("actions.export")}</Link>
-          </Button>
-          <Button size="small" variant="secondary" asChild>
-            <Link to={`import${location.search}`}>{t("actions.import")}</Link>
-          </Button>
-          <Button size="small" variant="secondary" asChild>
-            <Link to="create">{t("actions.create")}</Link>
-          </Button>
+        <div className="flex items-center justify-center gap-x-4">
+          <ProductVisibilitySwitches />
+          <div className="flex items-center justify-center gap-x-2">
+            <Button size="small" variant="secondary" asChild>
+              <Link to={`export${location.search}`}>{t("actions.export")}</Link>
+            </Button>
+            <Button size="small" variant="secondary" asChild>
+              <Link to={`import${location.search}`}>{t("actions.import")}</Link>
+            </Button>
+            <Button size="small" variant="secondary" asChild>
+              <Link to="create">{t("actions.create")}</Link>
+            </Button>
+          </div>
         </div>
       </div>
       <_DataTable

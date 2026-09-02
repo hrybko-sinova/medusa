@@ -137,7 +137,9 @@
     "hide": "Нууцлах",
     "export": "Экспортлох",
     "import": "Импортлох",
-    "cannotUndo": "Энэ үйлдлийг буцаах боломжгүй"
+    "cannotUndo": "Энэ үйлдлийг буцаах боломжгүй",
+    "archive": "Архивлах",
+    "restore": "Сэргээх"
   },
   "operators": {
     "in": "дотор"
@@ -396,7 +398,9 @@
   "products": {
     "domain": "Бүтээгдэхүүнүүд",
     "list": {
-      "noRecordsMessage": "Зарах эхний бүтээгдэхүүнээ үүсгээрэй."
+      "noRecordsMessage": "Зарах эхний бүтээгдэхүүнээ үүсгээрэй.",
+      "showDrafted": "Ноорог харуулах",
+      "showArchived": "Архивласныг харуулах"
     },
     "edit": {
       "header": "Бүтээгдэхүүнийг засах",
@@ -532,7 +536,8 @@
       "draft": "Ноорог",
       "published": "Нийтлэгдсэн",
       "proposed": "Санал болгосон",
-      "rejected": "Татгалзсан"
+      "rejected": "Татгалзсан",
+      "archived": "Архивласан"
     },
     "fields": {
       "title": {
@@ -694,8 +699,28 @@
         "error": {
           "header": "Бүтээгдэхүүн устгахад алдаа гарлаа"
         }
+      },
+      "archive": {
+        "success": {
+          "header": "Архивлах",
+          "description": "{{title}}"
+        },
+        "error": {
+          "header": "Архивлах"
+        }
+      },
+      "restore": {
+        "success": {
+          "header": "Сэргээх",
+          "description": "{{title}}"
+        },
+        "error": {
+          "header": "Сэргээх"
+        }
       }
-    }
+    },
+    "archiveWarning": "Архивлах {{title}}.",
+    "restoreWarning": "Сэргээх {{title}}."
   },
   "collections": {
     "domain": "Цуглуулгууд",
@@ -1398,7 +1423,7 @@
       "refundableAmount": "Буцаах боломжтой хэмжээ",
       "returnableQuantity": "Буцаах боломжтой хэмжээ"
     }
-  },    
+  },
   "draftOrders": {
     "domain": "Ноорог захиалгууд",
     "deleteWarning": "Та {{id}} ноорог захиалгыг устгах гэж байна. Энэ үйлдлийг буцаах боломжгүй.",
@@ -2242,7 +2267,7 @@
         "attribute": "Үйлчлүүлэгчдийн бүлгүүд"
       }
     }
-  },  
+  },
   "profile": {
     "domain": "Профайл",
     "manageYourProfileDetails": "Профайлын дэлгэрэнгүй мэдээллийг удирдах.",
@@ -2312,7 +2337,7 @@
       "currenciesRemoved": "Дэлгүүрээс валютууд амжилттай устгагдлаа",
       "updatedTaxInclusivitySuccessfully": "Татвар багтсан үнийг амжилттай шинэчлэгдлээ"
     }
-  },  
+  },
   "regions": {
     "domain": "Бүсүүд",
     "subtitle": "Бүс гэдэг нь та бүтээгдэхүүнээ борлуулдаг газар юм. Энэ нь олон улсыг хамарч, өөр өөр татварын хувь, үйлчилгээ үзүүлэгчид, валюттай байж болно.",
@@ -2415,7 +2440,7 @@
       "productTypeOverridesHeader": "Бүтээгдэхүүний төрлүүд",
       "shippingOptionOverridesHeader": "Хүргэлтийн сонголтууд"
     }
-  },  
+  },
   "locations": {
     "domain": "Байршлууд",
     "editLocation": "Байршлыг засах",
@@ -2546,7 +2571,7 @@
       "revokedAtLabel": "Цуцлагдсан",
       "createdByLabel": "Үүсгэсэн"
     }
-  },  
+  },
   "returnReasons": {
     "domain": "Буцаалтын Шалтгаанууд",
     "subtitle": "Буцаагдсан зүйлсийн шалтгааныг удирдах.",
@@ -2573,7 +2598,10 @@
         "placeholder": "wrong_size",
         "tooltip": "Утга нь буцаалтын шалтгааны хувьд өвөрмөц танигч байх ёстой."
       },
-      "label": { "label": "Шошго", "placeholder": "Буруу хэмжээ" },
+      "label": {
+        "label": "Шошго",
+        "placeholder": "Буруу хэмжээ"
+      },
       "description": {
         "label": "Тайлбар",
         "placeholder": "Үйлчлүүлэгч буруу хэмжээтэй бүтээгдэхүүн хүлээн авсан"
@@ -2671,7 +2699,7 @@
         "timeout": "Цаг хэтрэх"
       }
     }
-  },  
+  },
   "productTypes": {
     "domain": "Бүтээгдэхүүний Төрлүүд",
     "subtitle": "Бүтээгдэхүүнээ төрөлд ангилах.",
@@ -2918,5 +2946,5 @@
     "minutes_other": "Минут",
     "seconds_one": "Секунд",
     "seconds_other": "Секунд"
-  }  
+  }
 }

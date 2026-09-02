@@ -194,6 +194,10 @@ export const useProductTableFilters = (
         label: t("products.productStatus.rejected"),
         value: "rejected",
       },
+      {
+        label: t("products.productStatus.archived"),
+        value: "archived",
+      },
     ],
   }
 

@@ -3,6 +3,7 @@ import { QueryClient } from "@tanstack/react-query"
 import { HttpTypes } from "@medusajs/types"
 import { productsQueryKeys } from "../../../hooks/api/products"
 import { sdk } from "../../../lib/client"
+import { DEFAULT_PRODUCT_LIST_STATUSES } from "../../../lib/product-list-status"
 import { queryClient } from "../../../lib/query-client"
 
 const productsListQuery = () => ({
@@ -10,9 +11,15 @@ const productsListQuery = () => ({
     limit: 20,
     offset: 0,
     is_giftcard: false,
+    status: DEFAULT_PRODUCT_LIST_STATUSES,
   }),
   queryFn: async () =>
-    sdk.admin.product.list({ limit: 20, offset: 0, is_giftcard: false }),
+    sdk.admin.product.list({
+      limit: 20,
+      offset: 0,
+      is_giftcard: false,
+      status: DEFAULT_PRODUCT_LIST_STATUSES,
+    }),
 })
 
 export const productsLoader = (client: QueryClient) => {

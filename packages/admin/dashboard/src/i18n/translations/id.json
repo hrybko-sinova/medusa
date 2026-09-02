@@ -398,7 +398,9 @@
     "products": {
         "domain": "Produk",
         "list": {
-            "noRecordsMessage": "Buat produk pertama Anda untuk mulai berjualan."
+            "noRecordsMessage": "Buat produk pertama Anda untuk mulai berjualan.",
+            "showDrafted": "Tampilkan draf",
+            "showArchived": "Tampilkan yang diarsipkan"
         },
         "edit": {
             "header": "Edit Produk",

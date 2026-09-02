@@ -138,7 +138,9 @@
     "hide": "Sakrij",
     "export": "Izvezi",
     "import": "Uvezi",
-    "cannotUndo": "Ova akcija se ne može poništiti"
+    "cannotUndo": "Ova akcija se ne može poništiti",
+    "archive": "Arhiviraj",
+    "restore": "Vrati"
   },
   "operators": {
     "in": "U"
@@ -398,7 +400,9 @@
   "products": {
     "domain": "Proizvodi",
     "list": {
-      "noRecordsMessage": "Kreirajte svoj prvi proizvod da biste počeli prodavati."
+      "noRecordsMessage": "Kreirajte svoj prvi proizvod da biste počeli prodavati.",
+      "showDrafted": "Prikaži nacrte",
+      "showArchived": "Prikaži arhivirane"
     },
     "edit": {
       "header": "Izmjena proizvoda",
@@ -534,7 +538,8 @@
       "draft": "Nacrt",
       "published": "Objavljeno",
       "proposed": "Predloženo",
-      "rejected": "Odbijeno"
+      "rejected": "Odbijeno",
+      "archived": "Arhivirano"
     },
     "fields": {
       "title": {
@@ -598,7 +603,6 @@
       "weight": {
         "label": "Težina"
       },
-
       "options": {
         "label": "Opcije proizvoda",
         "hint": "Opcije se koriste za definisanje boje, veličine itd. proizvoda",
@@ -715,8 +719,28 @@
         "error": {
           "header": "Brisanje proizvoda nije uspjelo"
         }
+      },
+      "archive": {
+        "success": {
+          "header": "Arhiviraj",
+          "description": "{{title}}"
+        },
+        "error": {
+          "header": "Arhiviraj"
+        }
+      },
+      "restore": {
+        "success": {
+          "header": "Vrati",
+          "description": "{{title}}"
+        },
+        "error": {
+          "header": "Vrati"
+        }
       }
-    }
+    },
+    "archiveWarning": "Arhiviraj {{title}}.",
+    "restoreWarning": "Vrati {{title}}."
   },
   "collections": {
     "domain": "Kolekcije",
@@ -2665,7 +2689,10 @@
         "placeholder": "pogrešna_veličina",
         "tooltip": "Vrijednost treba biti jedinstveni identifikator za razlog povrata."
       },
-      "label": { "label": "Oznaka", "placeholder": "Pogrešna veličina" },
+      "label": {
+        "label": "Oznaka",
+        "placeholder": "Pogrešna veličina"
+      },
       "description": {
         "label": "Opis",
         "placeholder": "Kupac je primio pogrešnu veličinu"

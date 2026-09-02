@@ -53,6 +53,7 @@
  *       - proposed
  *       - published
  *       - rejected
+ *       - archived
  *   type_id:
  *     type: string
  *     title: type_id
