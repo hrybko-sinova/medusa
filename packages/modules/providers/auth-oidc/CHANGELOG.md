@@ -1,5 +1,12 @@
 # @medusajs/auth-oidc
 
+## 2.20.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @medusajs/framework@2.20.2
+
 ## 2.20.1
 
 ### Patch Changes

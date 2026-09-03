@@ -1,5 +1,12 @@
 # @medusajs/file-s3
 
+## 2.20.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @medusajs/framework@2.20.2
+
 ## 2.20.1
 
 ### Patch Changes

@@ -1,5 +1,14 @@
 # Change Log
 
+## 2.20.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @medusajs/core-flows@2.20.2
+  - @medusajs/framework@2.20.2
+  - @medusajs/medusa@2.20.2
+
 ## 2.20.1
 
 ### Patch Changes

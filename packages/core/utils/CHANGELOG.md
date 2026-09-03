@@ -1,5 +1,12 @@
 # @medusajs/utils
 
+## 2.20.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @medusajs/deps@2.20.2
+
 ## 2.20.1
 
 ### Patch Changes
