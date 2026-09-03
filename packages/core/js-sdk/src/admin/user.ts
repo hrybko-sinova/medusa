@@ -172,10 +172,10 @@ export class User {
    */
   async listRoles(
     id: string,
-    queryParams?: HttpTypes.AdminRbacRoleUserListParams,
+    queryParams?: HttpTypes.AdminGetUserRolesParams,
     headers?: ClientHeaders
   ) {
-    return this.client.fetch<HttpTypes.AdminGetUserRolesParams>(
+    return this.client.fetch<HttpTypes.AdminUserRoleListResponse>(
       `/admin/users/${id}/roles`,
       {
         query: queryParams,

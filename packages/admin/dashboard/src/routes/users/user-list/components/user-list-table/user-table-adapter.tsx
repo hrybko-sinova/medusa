@@ -3,6 +3,8 @@ import { TFunction } from "i18next"
 import { useMemo } from "react"
 import { useTranslation } from "react-i18next"
 import { useUsers } from "../../../../../hooks/api/users"
+import { useFeatureFlag } from "../../../../../providers/feature-flag-provider"
+import { usePermissions } from "../../../../../providers/permissions-provider"
 import {
   createTableAdapter,
   TableAdapter,
@@ -11,8 +13,10 @@ import { UserListTableActions } from "./user-list-table-actions"
 
 export function createUserTableAdapter({
   t,
+  showRoles,
 }: {
   t: TFunction<"translation", undefined>
+  showRoles: boolean
 }): TableAdapter<HttpTypes.AdminUser> {
   return createTableAdapter<HttpTypes.AdminUser>({
     entity: "users",
@@ -60,7 +64,7 @@ export function createUserTableAdapter({
         "deleted_at",
       ]
 
-      return columns.map((column) => {
+      const transformedColumns = columns.map((column) => {
         const isFilterDisabled = !ALLOWED_FILTERS.includes(column.field)
 
         return {
@@ -70,12 +74,47 @@ export function createUserTableAdapter({
             : column.filter,
         }
       })
+
+      if (!showRoles) {
+        return transformedColumns
+      }
+
+      return [
+        ...transformedColumns,
+        {
+          id: "roles",
+          name: t("fields.role"),
+          field: "roles",
+          sortable: false,
+          hideable: true,
+          default_visible: true,
+          data_type: "string",
+          semantic_type: "relationship",
+          context: "display",
+          render_mode: "badges",
+          default_order: 350,
+          category: "relationship",
+          computed: {
+            type: "badges",
+            required_fields: ["rbac_roles.name"],
+            optional_fields: [],
+          },
+          metadata: {
+            list_field: "rbac_roles",
+            display_field: "name",
+          },
+          filter: { enabled: false },
+        },
+      ]
     },
   })
 }
 
-// eslint-disable-next-line max-len
 export function useUserTableAdapter(): TableAdapter<HttpTypes.AdminUser> {
   const { t } = useTranslation()
-  return useMemo(() => createUserTableAdapter({ t }), [t])
+  const isRbacEnabled = useFeatureFlag("rbac")
+  const { hasPermission } = usePermissions()
+  const showRoles = isRbacEnabled && hasPermission("rbac_role:read")
+
+  return useMemo(() => createUserTableAdapter({ t, showRoles }), [t, showRoles])
 }

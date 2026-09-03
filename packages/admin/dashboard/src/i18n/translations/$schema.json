@@ -2377,7 +2377,13 @@
               "type": "string"
             }
           },
-          "required": ["draft", "published", "proposed", "rejected", "archived"],
+          "required": [
+            "draft",
+            "published",
+            "proposed",
+            "rejected",
+            "archived"
+          ],
           "additionalProperties": false
         },
         "columns": {
@@ -10680,6 +10686,12 @@
         "deleteUserSuccess": {
           "type": "string"
         },
+        "roleRequired": {
+          "type": "string"
+        },
+        "rolesNotEditable": {
+          "type": "string"
+        },
         "invite": {
           "type": "string"
         }
@@ -10703,6 +10715,8 @@
         "list",
         "deleteUserWarning",
         "deleteUserSuccess",
+        "roleRequired",
+        "rolesNotEditable",
         "invite"
       ],
       "additionalProperties": false
@@ -14384,13 +14398,13 @@
         "login": {
           "type": "object",
           "properties": {
+            "noProviders": {
+              "type": "string"
+            },
             "authenticationFailed": {
               "type": "string"
             },
             "cloud": {
-              "type": "string"
-            },
-            "noProviders": {
               "type": "string"
             },
             "continueWithProvider": {
@@ -14404,9 +14418,9 @@
             }
           },
           "required": [
+            "noProviders",
             "authenticationFailed",
             "cloud",
-            "noProviders",
             "continueWithProvider",
             "or",
             "provisioningFailed"

@@ -1,3 +1,5 @@
+import type { AdminRbacRole } from "../../rbac"
+
 export interface AdminUser {
   /**
    * The user's ID.
@@ -29,6 +31,12 @@ export interface AdminUser {
    * @ignore
    */
   roles?: string[] | null
+  /**
+   * The RBAC roles assigned to the user.
+   *
+   * @featureFlag rbac
+   */
+  rbac_roles?: AdminRbacRole[] | null
   /**
    * The date the user was created.
    */

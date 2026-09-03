@@ -2795,6 +2795,8 @@
     },
     "deleteUserWarning": "You are about to delete the user {{name}}. This action cannot be undone.",
     "deleteUserSuccess": "User {{name}} deleted successfully",
+    "roleRequired": "Select at least one role.",
+    "rolesNotEditable": "You don't have permission to change these roles: {{roles}}.",
     "invite": "Invite"
   },
   "roles": {

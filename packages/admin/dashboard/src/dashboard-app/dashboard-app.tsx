@@ -1,3 +1,4 @@
+import { permissionDataStrategy } from "../lib/permission-data-strategy"
 import {
   CustomFieldContainerZone,
   CustomFieldFormTab,
@@ -578,6 +579,7 @@ export class DashboardApp {
     })
 
     const router = createBrowserRouter(routes, {
+      dataStrategy: permissionDataStrategy,
       basename: __BASE__ || "/",
     })
 

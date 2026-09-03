@@ -1,15 +1,18 @@
-import { useEffect } from "react"
-import { Outlet, useLocation, useNavigate } from "react-router-dom"
+import { Spinner } from "@medusajs/icons"
+import { Navigate } from "react-router-dom"
+import { usePermissions } from "../../providers/permissions-provider"
 
 export const Settings = () => {
-  const navigate = useNavigate()
-  const location = useLocation()
+  const { hasPermission, isLoading } = usePermissions()
 
-  useEffect(() => {
-    if (location.pathname === "/settings") {
-      navigate("/settings/store", { replace: true })
-    }
-  }, [location.pathname, navigate])
+  if (isLoading) {
+    return <Spinner className="text-ui-fg-interactive animate-spin" />
+  }
 
-  return <Outlet />
+  return (
+    <Navigate
+      to={hasPermission("store:read") ? "/settings/store" : "/settings/profile"}
+      replace
+    />
+  )
 }

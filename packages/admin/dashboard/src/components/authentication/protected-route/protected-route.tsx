@@ -1,6 +1,8 @@
+import { RoutePermissionGuard } from "../route-permission-guard"
+import { useFeatureFlagContext } from "../../../providers/feature-flag-provider"
 import { Spinner } from "@medusajs/icons"
 import { useMemo } from "react"
-import { Navigate, Outlet, useLocation } from "react-router-dom"
+import { Navigate, useLocation } from "react-router-dom"
 import { useMePermissions } from "../../../hooks/api/rbac-roles"
 import { useMe } from "../../../hooks/api/users"
 import type { Permission, UserPolicy } from "../../../lib/permissions"
@@ -11,6 +13,7 @@ import { SidebarProvider } from "../../../providers/sidebar-provider"
 
 export const ProtectedRoute = () => {
   const location = useLocation()
+  const { isLoading: isLoadingFlags } = useFeatureFlagContext()
   const isRbacEnabled = useFeatureFlag("rbac")
 
   const { user, isLoading: isLoadingUser } = useMe()
@@ -29,7 +32,11 @@ export const ProtectedRoute = () => {
     }
   }, [permissionsResponse])
 
-  if (isLoadingUser) {
+  if (
+    isLoadingUser ||
+    isLoadingFlags ||
+    (isRbacEnabled && isLoadingPermissions)
+  ) {
     return (
       <div className="flex min-h-screen items-center justify-center">
         <Spinner className="text-ui-fg-interactive animate-spin" />
@@ -49,7 +56,7 @@ export const ProtectedRoute = () => {
     >
       <SidebarProvider>
         <SearchProvider>
-          <Outlet />
+          <RoutePermissionGuard />
         </SearchProvider>
       </SidebarProvider>
     </PermissionsProvider>

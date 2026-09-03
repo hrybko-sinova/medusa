@@ -1,5 +1,5 @@
 import { HttpTypes } from "@medusajs/types"
-import { Container, createDataTableColumnHelper } from "@medusajs/ui"
+import { Badge, Container, createDataTableColumnHelper } from "@medusajs/ui"
 import { keepPreviousData } from "@tanstack/react-query"
 import { useMemo } from "react"
 import { useTranslation } from "react-i18next"
@@ -9,25 +9,33 @@ import { useDataTableDateColumns } from "../../../../../components/data-table/he
 import { useDataTableDateFilters } from "../../../../../components/data-table/helpers/general/use-data-table-date-filters"
 import { useUsers } from "../../../../../hooks/api/users"
 import { useQueryParams } from "../../../../../hooks/use-query-params"
+import { useFeatureFlag } from "../../../../../providers/feature-flag-provider"
+import { usePermissions } from "../../../../../providers/permissions-provider"
 import { UserListTableActions } from "./user-list-table-actions"
 
 const PAGE_SIZE = 20
 
 export const UserListTable = () => {
   const { q, order, offset } = useQueryParams(["q", "order", "offset"])
+  const isRbacEnabled = useFeatureFlag("rbac")
+  const { hasPermission } = usePermissions()
+  const showRoles = isRbacEnabled && hasPermission("rbac_role:read")
   const { users, count, isPending, isError, error } = useUsers(
     {
       q,
       order,
       offset: offset ? parseInt(offset) : 0,
       limit: PAGE_SIZE,
+      fields: showRoles
+        ? "id,email,first_name,last_name,created_at,updated_at,rbac_roles.id,rbac_roles.name"
+        : undefined,
     },
     {
       placeholderData: keepPreviousData,
     }
   )
 
-  const columns = useColumns()
+  const columns = useColumns(showRoles)
   const filters = useFilters()
 
   const { t } = useTranslation()
@@ -69,7 +77,7 @@ export const UserListTable = () => {
 
 const columnHelper = createDataTableColumnHelper<HttpTypes.AdminUser>()
 
-const useColumns = () => {
+const useColumns = (showRoles: boolean) => {
   const { t } = useTranslation()
 
   const dateColumns = useDataTableDateColumns<HttpTypes.AdminUser>()
@@ -103,13 +111,37 @@ const useColumns = () => {
         sortAscLabel: t("filters.sorting.alphabeticallyAsc"),
         sortDescLabel: t("filters.sorting.alphabeticallyDesc"),
       }),
+      ...(showRoles
+        ? [
+            columnHelper.accessor("rbac_roles", {
+              header: t("fields.role"),
+              cell: ({ row }) => {
+                const roles = row.original.rbac_roles ?? []
+
+                if (!roles.length) {
+                  return "-"
+                }
+
+                return (
+                  <div className="flex flex-wrap gap-1">
+                    {roles.map((role) => (
+                      <Badge key={role.id} size="xsmall">
+                        {role.name}
+                      </Badge>
+                    ))}
+                  </div>
+                )
+              },
+            }),
+          ]
+        : []),
       ...dateColumns,
       columnHelper.display({
         id: "action",
         cell: ({ row }) => <UserListTableActions user={row.original} />,
       }),
     ],
-    [t, dateColumns]
+    [t, dateColumns, showRoles]
   )
 }
 

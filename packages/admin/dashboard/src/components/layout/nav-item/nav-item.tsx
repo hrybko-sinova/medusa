@@ -29,6 +29,9 @@ import { useLayoutEdit } from "../../../hooks/use-layout-edit"
 import { useGlobalShortcuts } from "../../../providers/keybind-provider/hooks"
 import { ConditionalTooltip } from "../../common/conditional-tooltip"
 
+import { canAccessRoute } from "../../../lib/permissions/route-permissions"
+import { usePermissions } from "../../../providers/permissions-provider"
+
 type ItemType = "core" | "extension" | "setting"
 
 type NestedItemProps = {
@@ -303,7 +306,22 @@ const NavSubItems = ({
   )
 }
 
-export const NavItem = ({
+export const NavItem = (props: INavItem) => {
+  const { hasPermission, isLoading } = usePermissions()
+  if (isLoading || !canAccessRoute(props.to, hasPermission)) {
+    return null
+  }
+  return (
+    <VisibleNavItem
+      {...props}
+      items={props.items?.filter((item) =>
+        canAccessRoute(item.to, hasPermission)
+      )}
+    />
+  )
+}
+
+const VisibleNavItem = ({
   icon,
   label,
   to,

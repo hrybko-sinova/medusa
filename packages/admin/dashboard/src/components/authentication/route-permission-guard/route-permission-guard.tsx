@@ -1,8 +1,9 @@
-import { ExclamationCircle } from "@medusajs/icons"
+import { getRoutePermission } from "../../../lib/permissions/route-permissions"
+import { ExclamationCircle, Spinner } from "@medusajs/icons"
 import { Container, Heading, Text } from "@medusajs/ui"
 import { useMemo } from "react"
 import { useTranslation } from "react-i18next"
-import { Navigate, Outlet, useMatches } from "react-router-dom"
+import { Navigate, Outlet, useLocation, useMatches } from "react-router-dom"
 import { type Permission } from "../../../lib/permissions"
 import {
   usePermissions,
@@ -99,28 +100,33 @@ const readRequirementFromHandle = (
  */
 export const RoutePermissionGuard = () => {
   const matches = useMatches()
+  const { pathname } = useLocation()
   const { hasAnyPermission, hasAllPermissions, isLoading } = usePermissions()
 
-  // Walk the matches from deepest to shallowest. The deepest route that
-  // declares `handle.permissions` wins, so children can override a parent.
-  const requirement = useMemo(() => {
-    for (let i = matches.length - 1; i >= 0; i--) {
-      const found = readRequirementFromHandle(matches[i].handle)
-      if (found) {
-        return found
-      }
-    }
-    return undefined
-  }, [matches])
+  // Parent requirements remain mandatory when a child declares its own.
+  const requirements = useMemo(() => {
+    const section = getRoutePermission(pathname)
+    const declared = matches.flatMap((match) => {
+      const requirement = readRequirementFromHandle(match.handle)
+      return requirement ? [requirement] : []
+    })
+    return section
+      ? [{ permissions: [section], requireAll: true }, ...declared]
+      : declared
+  }, [matches, pathname])
+  const requirement = requirements.find((item) =>
+    item.requireAll
+      ? !hasAllPermissions(item.permissions)
+      : !hasAnyPermission(item.permissions)
+  )
 
   useRegisterPermissions(requirement?.permissions ?? null, {
     requireAll: requirement?.requireAll ?? false,
     source: "route",
   })
 
-  // Don't block while loading - TODO: reconsider this
   if (isLoading) {
-    return <Outlet />
+    return <Spinner className="text-ui-fg-interactive animate-spin" />
   }
 
   // No requirement declared anywhere up the tree → opt-out, render through.

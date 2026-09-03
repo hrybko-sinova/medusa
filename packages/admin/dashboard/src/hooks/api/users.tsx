@@ -16,6 +16,14 @@ const usersQueryKeys = {
   ...queryKeysFactory(USERS_QUERY_KEY),
   me: (query?: HttpTypes.AdminUserParams) =>
     [USERS_QUERY_KEY, "me", query ? { query } : undefined].filter((k) => !!k),
+  roles: (id: string, query?: HttpTypes.AdminGetUserRolesParams) =>
+    [
+      USERS_QUERY_KEY,
+      "detail",
+      id,
+      "roles",
+      query ? { query } : undefined,
+    ].filter((k) => !!k),
 }
 
 export const useMe = (
@@ -82,6 +90,72 @@ export const useUsers = (
   return { ...data, ...rest }
 }
 
+export const useUserRoles = (
+  id: string,
+  query?: HttpTypes.AdminGetUserRolesParams,
+  options?: Omit<
+    UseQueryOptions<
+      HttpTypes.AdminUserRoleListResponse,
+      FetchError,
+      HttpTypes.AdminUserRoleListResponse,
+      QueryKey
+    >,
+    "queryFn" | "queryKey"
+  >
+) => {
+  const { data, ...rest } = useQuery({
+    queryFn: () => sdk.admin.user.listRoles(id, query),
+    queryKey: usersQueryKeys.roles(id, query),
+    ...options,
+  })
+
+  return { ...data, ...rest }
+}
+
+export const useAddUserRoles = (
+  id: string,
+  options?: UseMutationOptions<
+    HttpTypes.AdminUserRolesResponse,
+    FetchError,
+    HttpTypes.AdminAssignUserRoles
+  >
+) => {
+  return useMutation({
+    mutationFn: (payload) => sdk.admin.user.addRoles(id, payload),
+    onSuccess: (data, variables, context) => {
+      queryClient.invalidateQueries({ queryKey: usersQueryKeys.roles(id) })
+      queryClient.invalidateQueries({ queryKey: usersQueryKeys.detail(id) })
+      queryClient.invalidateQueries({ queryKey: usersQueryKeys.lists() })
+      queryClient.invalidateQueries({ queryKey: ["rbac_roles"] })
+
+      options?.onSuccess?.(data, variables, context)
+    },
+    ...options,
+  })
+}
+
+export const useRemoveUserRoles = (
+  id: string,
+  options?: UseMutationOptions<
+    HttpTypes.AdminUserRolesDeleteResponse,
+    FetchError,
+    HttpTypes.AdminRemoveUserRoles
+  >
+) => {
+  return useMutation({
+    mutationFn: (payload) => sdk.admin.user.removeRoles(id, payload),
+    onSuccess: (data, variables, context) => {
+      queryClient.invalidateQueries({ queryKey: usersQueryKeys.roles(id) })
+      queryClient.invalidateQueries({ queryKey: usersQueryKeys.detail(id) })
+      queryClient.invalidateQueries({ queryKey: usersQueryKeys.lists() })
+      queryClient.invalidateQueries({ queryKey: ["rbac_roles"] })
+
+      options?.onSuccess?.(data, variables, context)
+    },
+    ...options,
+  })
+}
+
 export const useUpdateUser = (
   id: string,
   query?: HttpTypes.AdminUserParams,
@@ -127,5 +201,21 @@ export const useDeleteUser = (
       options?.onSuccess?.(data, variables, context)
     },
     ...options,
+  })
+}
+
+// Self-service profile changes must not use the user-administration endpoint.
+export const useUpdateProfile = () => {
+  return useMutation({
+    mutationFn: (payload: Pick<HttpTypes.AdminUpdateUser, "first_name" | "last_name">) =>
+      sdk.client.fetch<HttpTypes.AdminUserResponse>("/admin/profile", {
+        method: "POST",
+        body: payload,
+      }),
+    onSuccess: ({ user }) => {
+      queryClient.invalidateQueries({ queryKey: usersQueryKeys.me() })
+      queryClient.invalidateQueries({ queryKey: usersQueryKeys.detail(user.id) })
+      queryClient.invalidateQueries({ queryKey: usersQueryKeys.lists() })
+    },
   })
 }

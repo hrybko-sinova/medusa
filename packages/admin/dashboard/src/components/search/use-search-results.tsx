@@ -7,6 +7,9 @@ import { Shortcut, ShortcutType } from "../../providers/keybind-provider"
 import { useGlobalShortcuts } from "../../providers/keybind-provider/hooks"
 import { DynamicSearchResult, SearchArea } from "./types"
 
+import { canAccessRoute } from "../../lib/permissions/route-permissions"
+import { usePermissions } from "../../providers/permissions-provider"
+
 type UseSearchProps = {
   q?: string
   limit: number
@@ -61,11 +64,15 @@ export const useSearchResults = ({
 
 const useStaticSearchResults = (currentArea: SearchArea) => {
   const globalCommands = useGlobalShortcuts()
+  const { hasPermission } = usePermissions()
 
   const results = useMemo(() => {
     const groups = new Map<ShortcutType, Shortcut[]>()
 
     globalCommands.forEach((command) => {
+      if (command.to && !canAccessRoute(command.to, hasPermission)) {
+        return
+      }
       const group = groups.get(command.type) || []
       group.push(command)
       groups.set(command.type, group)
@@ -95,7 +102,7 @@ const useStaticSearchResults = (currentArea: SearchArea) => {
       title,
       items,
     }))
-  }, [globalCommands, currentArea])
+  }, [globalCommands, currentArea, hasPermission])
 
   return results
 }
