@@ -757,6 +757,7 @@
         "label": "Product Options",
         "hint": "Select which options should be associated to this product.",
         "placeholder": "Select options",
+        "deleteVariantsConfirmation": "This change will permanently delete the affected product variants ({{count}} total). This action cannot be undone.",
         "error": {
           "noValues": "Please select at least one value for the added option(s)."
         }

@@ -137,6 +137,32 @@ export const useUpdateProductVariantsBatch = (
   })
 }
 
+export const useDeleteProductVariantsBatch = (
+  productId: string,
+  options?: UseMutationOptions<
+    HttpTypes.AdminBatchProductVariantResponse,
+    FetchError,
+    NonNullable<HttpTypes.AdminBatchProductVariantRequest["delete"]>
+  >
+) => {
+  return useMutation({
+    mutationFn: (variantIds) =>
+      sdk.admin.product.batchVariants(productId, {
+        delete: variantIds,
+      }),
+    onSuccess: (data, variables, context) => {
+      queryClient.invalidateQueries({ queryKey: variantsQueryKeys.lists() })
+      queryClient.invalidateQueries({ queryKey: variantsQueryKeys.details() })
+      queryClient.invalidateQueries({
+        queryKey: productsQueryKeys.detail(productId),
+      })
+
+      options?.onSuccess?.(data, variables, context)
+    },
+    ...options,
+  })
+}
+
 export const useProductVariantsInventoryItemsBatch = (
   productId: string,
   options?: UseMutationOptions<

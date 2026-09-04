@@ -2959,6 +2959,9 @@
                 "placeholder": {
                   "type": "string"
                 },
+                "deleteVariantsConfirmation": {
+                  "type": "string"
+                },
                 "error": {
                   "type": "object",
                   "properties": {
@@ -2976,6 +2979,7 @@
                 "label",
                 "hint",
                 "placeholder",
+                "deleteVariantsConfirmation",
                 "error"
               ],
               "additionalProperties": false

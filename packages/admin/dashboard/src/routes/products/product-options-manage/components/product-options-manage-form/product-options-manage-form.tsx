@@ -1,5 +1,5 @@
 import { HttpTypes } from "@medusajs/types"
-import { Button, Hint, Label, toast, Tooltip } from "@medusajs/ui"
+import { Button, Hint, Label, toast, Tooltip, usePrompt } from "@medusajs/ui"
 import { InformationCircle } from "@medusajs/icons"
 import { useEffect, useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
@@ -12,11 +12,14 @@ import { KeyboundForm } from "../../../../../components/utilities/keybound-form"
 import { useExtendableForm } from "../../../../../dashboard-app"
 import {
   productOptionsQueryKeys,
+  useDeleteProductVariantsBatch,
   useLinkProductOptions,
+  useProductVariants,
 } from "../../../../../hooks/api"
 import { useExtension } from "../../../../../providers/extension-provider"
 import { useComboboxData } from "../../../../../hooks/use-combobox-data"
 import { sdk } from "../../../../../lib/client"
+import { getAffectedVariantIds } from "./get-affected-variant-ids"
 
 type ProductOptionsManageFormProps = {
   product: HttpTypes.AdminProduct
@@ -65,6 +68,7 @@ export const ProductOptionsManageForm = ({
   product,
 }: ProductOptionsManageFormProps) => {
   const { t } = useTranslation()
+  const prompt = usePrompt()
   const { handleSuccess } = useRouteModal()
   const { getFormConfigs } = useExtension()
   const configs = getFormConfigs("product", "edit")
@@ -164,7 +168,18 @@ export const ProductOptionsManageForm = ({
     return [...merged.values()]
   }, [formOptions, productOptionsCombobox.options])
 
+  const {
+    variants,
+    isLoading: isLoadingVariants,
+    isError: isVariantsError,
+    error: variantsError,
+  } = useProductVariants(product.id, {
+    limit: 9999,
+    fields: "id,title,*options",
+  })
   const { mutateAsync, isPending } = useLinkProductOptions(product.id)
+  const { mutateAsync: deleteVariantsAsync, isPending: isDeletingVariants } =
+    useDeleteProductVariantsBatch(product.id)
 
   const handleProductOptionSelect = (optionIds: string[]) => {
     const currentOptions = form.getValues("options") || []
@@ -322,6 +337,7 @@ export const ProductOptionsManageForm = ({
     const optionsToUpdate: NonNullable<
       HttpTypes.AdminLinkProductOptions["update"]
     > = []
+    const removedValueIdsByOptionId = new Map<string, Set<string>>()
 
     // Check for completely removed options
     for (const currentId of currentOptionIds) {
@@ -427,12 +443,52 @@ export const ProductOptionsManageForm = ({
         const addEntries = [...valuesToAdd, ...newValueEntries] // link new values to PPO and create new values if needed
 
         if (addEntries.length || valuesToRemove.length) {
+          if (valuesToRemove.length) {
+            removedValueIdsByOptionId.set(optionId, new Set(valuesToRemove))
+          }
+
           optionsToUpdate.push({
             product_option_id: optionId,
             add: addEntries.length ? addEntries : undefined,
             remove: valuesToRemove.length ? valuesToRemove : undefined,
           })
         }
+      }
+    }
+
+    const hasRemovals =
+      optionsToRemove.length > 0 || removedValueIdsByOptionId.size > 0
+
+    if (hasRemovals && isVariantsError) {
+      toast.error(variantsError.message)
+      return
+    }
+
+    const affectedVariantIds = getAffectedVariantIds(
+      variants ?? [],
+      new Set(optionsToRemove),
+      removedValueIdsByOptionId
+    )
+
+    if (affectedVariantIds.length) {
+      const confirmed = await prompt({
+        title: t("general.areYouSure"),
+        description: t("products.options.manage.deleteVariantsConfirmation", {
+          count: affectedVariantIds.length,
+        }),
+        confirmText: t("actions.delete"),
+        cancelText: t("actions.cancel"),
+      })
+
+      if (!confirmed) {
+        return
+      }
+
+      try {
+        await deleteVariantsAsync(affectedVariantIds)
+      } catch (error) {
+        toast.error(error instanceof Error ? error.message : String(error))
+        return
       }
     }
 
@@ -654,7 +710,12 @@ export const ProductOptionsManageForm = ({
                 {t("actions.cancel")}
               </Button>
             </RouteDrawer.Close>
-            <Button size="small" type="submit" isLoading={isPending}>
+            <Button
+              size="small"
+              type="submit"
+              isLoading={isPending || isDeletingVariants}
+              disabled={isLoadingVariants}
+            >
               {t("actions.save")}
             </Button>
           </div>
