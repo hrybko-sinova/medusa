@@ -1,3 +1,4 @@
+import { getProductCsvExtension } from "../helpers/product-csv-extension"
 import {
   ContainerRegistrationKeys,
   deduplicate,
@@ -17,19 +18,19 @@ const DEFAULT_BATCH_SIZE = 50
 
 /**
  * This step exports products to a CSV file based on the provided filters.
- * 
+ *
  * @example
  * To export all products:
- * 
+ *
  * ```ts
  * const data = exportProductsStep({
  *   select: ["id", "title", "handle"],
  *   batch_size: 100
  * })
  * ```
- * 
+ *
  * To export products from a specific sales channel:
- * 
+ *
  * ```ts
  * const data = exportProductsStep({
  *   select: ["id", "title", "handle"],
@@ -45,6 +46,7 @@ export const exportProductsStep = createStep(
     input: WorkflowTypes.ProductWorkflow.ExportProductsDTO,
     { container }
   ) => {
+    const extension = getProductCsvExtension(container)
     const query = container.resolve(ContainerRegistrationKeys.QUERY)
     const fileModule = container.resolve(Modules.FILE)
     const regionModule = container.resolve(Modules.REGION)
@@ -67,7 +69,12 @@ export const exportProductsStep = createStep(
     let page = 0
     let hasHeader = false
 
-    const fields = deduplicate(["id", "handle", ...input.select])
+    const fields = deduplicate([
+      "id",
+      "handle",
+      ...input.select,
+      ...(extension?.exportFields ?? []),
+    ])
     const { sales_channel_id, ..._filters } = input.filter ?? {}
 
     while (true) {
@@ -104,7 +111,12 @@ export const exportProductsStep = createStep(
         break
       }
 
-      const normalizedProducts = normalizeForExport(products, { regions })
+      const normalizedProducts = normalizeForExport(
+        extension
+          ? products.map((product) => extension.normalizeExport(product))
+          : products,
+        { regions }
+      )
 
       const batchCsv = json2csv(normalizedProducts, {
         prependHeader: !hasHeader,

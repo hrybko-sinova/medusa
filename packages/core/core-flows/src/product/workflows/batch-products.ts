@@ -1,12 +1,12 @@
 import {
   BatchWorkflowInput,
-  BatchWorkflowOutput,
   CreateProductWorkflowInputDTO,
   ProductTypes,
   UpdateProductWorkflowInputDTO,
 } from "@medusajs/framework/types"
 import {
   createWorkflow,
+  createHook,
   parallelize,
   transform,
   when,
@@ -25,7 +25,9 @@ export interface BatchProductWorkflowInput
   extends BatchWorkflowInput<
     CreateProductWorkflowInputDTO,
     UpdateProductWorkflowInputDTO
-  > {}
+  > {
+  additional_data?: Record<string, unknown>
+}
 
 export const batchProductsWorkflowId = "batch-products"
 /**
@@ -80,9 +82,7 @@ export const batchProductsWorkflowId = "batch-products"
  */
 export const batchProductsWorkflow = createWorkflow(
   batchProductsWorkflowId,
-  (
-    input: WorkflowData<BatchProductWorkflowInput>
-  ): WorkflowResponse<BatchWorkflowOutput<ProductTypes.ProductDTO>> => {
+  (input: WorkflowData<BatchProductWorkflowInput>) => {
     const productsToUpdate = transform({ input }, ({ input }) => {
       return input.update ?? []
     })
@@ -111,14 +111,15 @@ export const batchProductsWorkflow = createWorkflow(
       )
     )
 
-    return new WorkflowResponse(
-      transform({ res, input }, (data) => {
-        return {
-          created: data.res[0] ?? [],
-          updated: data.res[1] ?? [],
-          deleted: data.input.delete ?? [],
-        }
-      })
-    )
+    const result = transform({ res, input }, (data) => ({
+      created: data.res[0] ?? [],
+      updated: data.res[1] ?? [],
+      deleted: data.input.delete ?? [],
+    }))
+    const productsBatched = createHook("productsBatched", {
+      result,
+      additional_data: input.additional_data,
+    })
+    return new WorkflowResponse(result, { hooks: [productsBatched] })
   }
 )

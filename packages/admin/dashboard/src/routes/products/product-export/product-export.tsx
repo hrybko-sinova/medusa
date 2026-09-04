@@ -2,7 +2,8 @@ import { Button, Heading, toast } from "@medusajs/ui"
 import { RouteDrawer, useRouteModal } from "../../../components/modals"
 import { useTranslation } from "react-i18next"
 import { ExportFilters } from "./components/export-filters"
-import { useExportProducts } from "../../../hooks/api"
+import { useMutation } from "@tanstack/react-query"
+import { downloadProductExport } from "./download-product-export"
 import { useProductTableQuery } from "../../../hooks/table/query"
 
 export const ProductExport = () => {
@@ -28,28 +29,12 @@ const ProductExportContent = () => {
   const { searchParams } = useProductTableQuery({ prefix: "p" })
   delete searchParams.fields
 
-  const { mutateAsync } = useExportProducts()
   const { handleSuccess } = useRouteModal()
-
-  const handleExportRequest = async () => {
-    await mutateAsync(
-      {
-        payload: {},
-        query: searchParams,
-      },
-      {
-        onSuccess: () => {
-          toast.info(t("products.export.success.title"), {
-            description: t("products.export.success.description"),
-          })
-          handleSuccess()
-        },
-        onError: (err) => {
-          toast.error(err.message)
-        },
-      }
-    )
-  }
+  const { mutate: exportProducts, isPending } = useMutation({
+    mutationFn: () => downloadProductExport(searchParams),
+    onSuccess: () => handleSuccess(),
+    onError: (err: Error) => toast.error(err.message),
+  })
 
   return (
     <>
@@ -60,11 +45,16 @@ const ProductExportContent = () => {
       <RouteDrawer.Footer>
         <div className="flex items-center gap-x-2">
           <RouteDrawer.Close asChild>
-            <Button size="small" variant="secondary">
+            <Button size="small" variant="secondary" disabled={isPending}>
               {t("actions.cancel")}
             </Button>
           </RouteDrawer.Close>
-          <Button onClick={handleExportRequest} size="small">
+          <Button
+            onClick={() => exportProducts()}
+            size="small"
+            isLoading={isPending}
+            disabled={isPending}
+          >
             {t("actions.export")}
           </Button>
         </div>

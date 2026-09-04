@@ -1,3 +1,8 @@
+import {
+  getProductCsvExtension,
+  preprocessProductCsvRow,
+  ProductCsvExtension,
+} from "../helpers/product-csv-extension"
 import { CsvError, parse, Parser } from "csv-parse"
 import type { HttpTypes, IFileModuleService } from "@medusajs/framework/types"
 import {
@@ -26,8 +31,10 @@ async function processChunk(
   file: IFileModuleService,
   fileKey: string,
   csvRows: ReturnType<(typeof CSVNormalizer)["preProcess"]>[],
-  currentRowNumber: number
+  currentRowNumber: number,
+  extension?: ProductCsvExtension
 ): Promise<Chunk> {
+  const additional_data = await extension?.normalizeImport(csvRows)
   const normalizer = new CSVNormalizer(csvRows)
   const products = normalizer.proccess(currentRowNumber)
 
@@ -56,7 +63,7 @@ async function processChunk(
 
   const { id } = await file.createFiles({
     filename: `${fileKey}.json`,
-    content: JSON.stringify({ create, update }),
+    content: JSON.stringify({ create, update, additional_data }),
     mimeType: "application/json",
   })
 
@@ -79,7 +86,8 @@ async function processChunk(
 async function createChunks(
   file: IFileModuleService,
   fileKey: string,
-  stream: Parser
+  stream: Parser,
+  extension?: ProductCsvExtension
 ): Promise<Chunk[]> {
   /**
    * The row under process
@@ -119,7 +127,11 @@ async function createChunks(
     for await (const row of stream) {
       rowsReadSoFar++
       currentCSVRow++
-      const normalizedRow = CSVNormalizer.preProcess(row, currentCSVRow)
+      const normalizedRow = preprocessProductCsvRow(
+        row,
+        currentCSVRow,
+        extension
+      )
       const rowValueValue =
         normalizedRow["product id"] || normalizedRow["product handle"]
 
@@ -138,7 +150,8 @@ async function createChunks(
               file,
               `${fileKey}-${chunks.length + 1}`,
               rows,
-              currentCSVRow
+              currentCSVRow,
+              extension
             )
           )
 
@@ -167,7 +180,8 @@ async function createChunks(
           file,
           `${fileKey}-${chunks.length + 1}`,
           rows,
-          currentCSVRow
+          currentCSVRow,
+          extension
         )
       )
     }
@@ -218,7 +232,8 @@ export const normalizeCsvToChunksStep = createStep(
         const chunks = await createChunks(
           file,
           fileKey,
-          contents.pipe(transformer)
+          contents.pipe(transformer),
+          getProductCsvExtension(container)
         )
 
         const summary = chunks.reduce<{ toCreate: number; toUpdate: number }>(
@@ -229,7 +244,6 @@ export const normalizeCsvToChunksStep = createStep(
           },
           { toCreate: 0, toUpdate: 0 }
         )
-
 
         resolve(
           new StepResponse({

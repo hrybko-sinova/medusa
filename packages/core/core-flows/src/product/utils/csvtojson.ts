@@ -1,6 +1,8 @@
 import { csv2json } from "json-2-csv"
 
-export interface ConvertCsvToJsonOptions<T> {}
+export interface ConvertCsvToJsonOptions<T> {
+  preserveStrings?: boolean
+}
 
 export const convertCsvToJson = <T extends object>(
   data: string,
@@ -9,6 +11,7 @@ export const convertCsvToJson = <T extends object>(
   return csv2json(data, {
     preventCsvInjection: true,
     delimiter: { field: detectDelimiter(data) },
+    ...(options?.preserveStrings ? { parseValue: (value: string) => value } : {}),
   }) as T[]
 }
 

@@ -1,6 +1,10 @@
 import type { HttpTypes } from "@medusajs/framework/types"
 import { CSVNormalizer, productValidators } from "@medusajs/framework/utils"
 import { StepResponse, createStep } from "@medusajs/framework/workflows-sdk"
+import {
+  getProductCsvExtension,
+  preprocessProductCsvRow,
+} from "../helpers/product-csv-extension"
 import { convertCsvToJson } from "../utils"
 
 /**
@@ -18,12 +22,20 @@ export const normalizeCsvStepId = "normalize-product-csv"
  */
 export const normalizeCsvStep = createStep(
   normalizeCsvStepId,
-  async (fileContent: NormalizeProductCsvStepInput) => {
+  async (fileContent: NormalizeProductCsvStepInput, { container }) => {
+    const extension = getProductCsvExtension(container)
     const csvProducts =
-      convertCsvToJson<Record<string, number | string | boolean>>(fileContent)
-    const normalizer = new CSVNormalizer(
-      csvProducts.map((row, index) => CSVNormalizer.preProcess(row, index + 1))
+      convertCsvToJson<Record<string, number | string | boolean>>(fileContent, {
+        // Let CSVNormalizer handle field types, as the chunked importer does.
+        // Automatic CSV coercion loses leading zeros in identifiers and turns
+        // metadata into objects before its JSON processor can read it.
+        preserveStrings: true,
+      })
+    const rows = csvProducts.map((row, index) =>
+      preprocessProductCsvRow(row, index + 1, extension)
     )
+    const additional_data = await extension?.normalizeImport(rows)
+    const normalizer = new CSVNormalizer(rows)
     const products = normalizer.proccess()
 
     const create = Object.keys(products.toCreate).reduce<
@@ -49,6 +61,7 @@ export const normalizeCsvStep = createStep(
     return new StepResponse({
       create,
       update,
+      additional_data,
     })
   }
 )
