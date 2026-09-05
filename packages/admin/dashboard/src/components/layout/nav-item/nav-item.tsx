@@ -19,6 +19,7 @@ import { Collapsible as RadixCollapsible } from "radix-ui"
 import {
   PropsWithChildren,
   ReactNode,
+  isValidElement,
   useCallback,
   useEffect,
   useState,
@@ -472,11 +473,17 @@ const Icon = ({ icon, type }: { icon?: ReactNode; type: ItemType }) => {
     return null
   }
 
-  return type === "extension" ? (
+  const isHeartIcon =
+    isValidElement(icon) &&
+    (icon.type as { displayName?: string }).displayName === "Heart"
+
+  if (type !== "extension" || isHeartIcon) {
+    return icon
+  }
+
+  return (
     <div className="shadow-borders-base bg-ui-bg-base flex h-5 w-5 items-center justify-center rounded-[4px]">
       <div className="h-[15px] w-[15px] overflow-hidden rounded-sm">{icon}</div>
     </div>
-  ) : (
-    icon
   )
 }
